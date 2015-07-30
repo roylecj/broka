@@ -1,4 +1,41 @@
+Template.documentList.onRendered(function() {
+  Session.set("thisPatient", false);
+});
+
 Template.documentList.helpers({
+  webpasPatient: function() {
+
+    if (!Session.get("thisPatient")) {
+      var urlString = "http://localhost:4050/?" + this.patientId
+
+      console.log("urlString=" + urlString);
+
+      var respValue = "";
+      respValue = Meteor.call('callViaduct', urlString, function(e, result) {
+        console.log("response= " + result);
+
+        Session.set("webpasPatient", result);
+      });
+
+      Session.set("thisPatient", true);
+    };
+
+    if (Session.get("webpasPatient") === "FOUND") {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  notpasPatient: function() {
+    if (Session.get("webpasPatient") === "NOTFOUND") {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  thisPatient: function() {
+    return Session.get("thisPatient");
+  },
   uploads: function() {
     return Uploads.find( {patientId: this.patientId}, {sort: {createdAt:-1}} );
   },

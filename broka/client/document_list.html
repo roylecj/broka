@@ -12,7 +12,20 @@
       {{#if patid}}
         {{#if notTempPatient}}
           {{#if patidPadded}}
-            <iframe width="100%" height="700" src="https://mobilepasdemo.healthhost.net/hospitalpatientlookup/launchpatientonly.asp?patientid={{patidPadded}}"></iframe>
+              {{#if webpasPatient}}
+                {{#if thisPatient}}
+                <iframe width="100%" height="700" src="https://mobilepasdemo.healthhost.net/hospitalpatientlookup/launchpatientonly.asp?patientid={{patidPadded}}"></iframe>
+                {{/if}}
+              {{else}}
+                {{#if notpasPatient}}
+                {{#if thisPatient}}
+                  <div class="jumbotron">
+                    <h1>Local UltraGenda Patient {{patid}}</h1>
+                    <p>This patient is not found on webPAS as they have been registered within UltraGenda.</p>
+                  </div>
+                {{/if}}
+                {{/if}}
+              {{/if}}
           {{/if}}
         {{else}}
           <div class="jumbotron">

@@ -15,3 +15,4 @@ tomi:upload-jquery
 tomi:upload-server
 http
 momentjs:moment
+sacha:spin
