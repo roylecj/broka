@@ -1,0 +1,42 @@
+<template name="documentList">
+
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#patient" data-toggle="tab" aria-expanded="false">Patient Details</a></li>
+
+    <li class=""><a href="#docs" data-toggle="tab" aria-expanded="true">Documents<span class="badge">{{countDocs}}</span></a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active patient" id="patient">
+      <br/>
+
+      {{#if patid}}
+        {{#if notTempPatient}}
+          {{#if patidPadded}}
+            <iframe width="100%" height="700" src="https://mobilepasdemo.healthhost.net/hospitalpatientlookup/launchpatientonly.asp?patientid={{patidPadded}}"></iframe>
+          {{/if}}
+        {{else}}
+          <div class="jumbotron">
+            <h1>Temporary Patient {{patid}}</h1>
+            <p>This patient is not found on webPAS as they have been temporarilly registered within UltraGenda.</p>
+          </div>
+        {{/if}}
+      {{/if}}
+<!--      <a class="disabled" href="https://healthhost.net/hospital/launchpatientonly.asp?patientid={{patid}}"> Launch WebPAS</a> -->
+    </div>
+    <div class="tab-pane well" id="docs">
+
+        {{#if countDocs}}
+          <h4>Documents for {{patid}}</h4>
+          {{#each uploads}}
+            {{> documentItem}}
+          {{/each}}
+        {{else}}
+          <div class="jumbotron">
+            <h1>No documents</h1>
+            <p>There are currently no documents for {{patid}}</p>
+          </div>
+        {{/if}}
+
+    </div>
+  </div>
+</template>

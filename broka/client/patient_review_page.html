@@ -1,0 +1,7 @@
+<template name="patientReviewPage">
+  {{#if brokaPatientPageURL}}
+    {{#if isAccessToken}}
+    <iframe class="well" src="{{brokaPatientPageURL}}" height="700" width="100%"></iframe>
+    {{/if}}
+  {{/if}}
+</template>
