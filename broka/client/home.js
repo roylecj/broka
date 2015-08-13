@@ -10,6 +10,7 @@ Template.home.events({
   'submit form': function(e) {
     e.preventDefault();
 
+    Session.set("fromMedtech", false);
     Session.set("portalPage", true);
 
     var userId =  $(e.target).find('[name=loginName]').val();
@@ -24,6 +25,8 @@ Template.home.events({
 
         var userString = userId;
         var passwordString = password;
+
+        console.log("user=" + userId + "password=" + passwordString);
 
 //        var urlString = "http://localhost:4041/?login=" + userString + "&password=" + passwordString
 

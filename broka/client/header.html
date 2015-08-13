@@ -16,10 +16,15 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
 
+            <!-- {{> loginButtons}} -->
+
             {{#if isPortal}}
               {{#if signedIn}}
 
-                <button id="goHome" class="btn btn-sm btn-info goHome"><span class="glyphicon glyphicon-home"></span></button>
+                {{#if notMedtech}}
+                  <button id="goHome" class="btn btn-sm btn-info goHome"><span class="glyphicon glyphicon-home"></span></button>
+                {{/if}}
+
                 {{#if statusUpdateCount}}
                   <button id="statusNotes" class="btn btn-sm btn-info" data-toggle="modal" data-target="#msgModal"><span class="glyphicon glyphicon-envelope"></span> {{messageText}}</button>
                 {{/if}}
@@ -35,8 +40,12 @@
                 {{/if}}
               {{/if}}
 
+<!-- {{>loginButtons}} -->
+
               {{#if currentUser}}
-              <button class="btn btn-danger btn-sm buttonLogout">{{currentUserName}} Logout</button>
+                {{#if notMedtech}}
+                  <button class="btn btn-danger btn-sm buttonLogout">{{currentUserName}} Logout</button>
+                {{/if}}
               {{/if}}
             {{/if}}
           </ul>

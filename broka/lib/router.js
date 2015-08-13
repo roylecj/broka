@@ -59,6 +59,50 @@ Router.route('/patientReview', {
     name: 'patientReviewPage'
 });
 
+Router.route('/UltraGendaBroka/patient/:patientId/pathway/:pathway/', function() {
+
+// We need to set the portal page flag so that we can add attachments...
+
+    Session.set("portalPage", true);
+    Session.set("fromMedtech", true);
+    
+// As the user is a combination of pathway and the user id...
+   var userId = this.params.query.user + this.params.pathway;
+   var password = this.params.query.password;
+
+   console.log("user=" + userId);
+   console.log("password=" + password);
+
+   Meteor.loginWithPassword(userId, password, function(e) {
+       console.log("logging in with " + userId);
+
+       console.log(e);
+
+       Session.set('signedIn', true);
+
+       var userString = userId;
+       var passwordString = password;
+
+       console.log("user=" + userId + "password=" + passwordString);
+
+
+       Session.set('pwd', passwordString);
+
+
+       Meteor.call("removeNotifications", userString);
+
+
+       Session.set("accessToken", "");
+
+       Router.go("brokaPage");
+     });
+
+   console.log("in broka");
+ }, {
+   name: 'pathwayNavigator'
+ }
+);
+
 // This is for the RFA processing for South Eastern Sydney
 
 Router.route('/rfa/', function() {

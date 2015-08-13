@@ -55,6 +55,9 @@ Template.header.helpers({
     },
     messages: function() {
       return ReferralStatus.find( {userId: Meteor.user().username, readFlag: false});
+    },
+    notMedtech: function() {
+      return !Session.get("fromMedtech");
     }
  });
 
