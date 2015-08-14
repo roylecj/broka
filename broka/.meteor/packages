@@ -16,3 +16,4 @@ tomi:upload-server
 http
 momentjs:moment
 sacha:spin
+json

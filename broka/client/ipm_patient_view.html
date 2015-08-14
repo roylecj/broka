@@ -1,8 +1,39 @@
 <template name="ipmPatientView">
-    <table>
-      <tr>
-        <td class="col-sm-1">
-        </td>
-      </tr>
-    </table>
+<div class="panel panel-primary">
+  <div class="panel-heading">Patient Demographics</div>
+    <div class="panel-body">
+      <h3>{{patientId}}
+        <!--
+      <img src="{{imageFile}}" />{{imageFile}}
+    -->
+      </h3>
+
+      <table class="table table-hover">
+        <tr>
+          <td>
+            <label class="control-label">Name</label>
+          </td>
+          <td>
+            <label class="text-info">{{patientSurname}}, {{patientGivenName}}</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="control-label">Sex</label>
+          </td>
+          <td>
+            <label class="text-info">{{patientSex}}</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="control-label">Date of Birth</label>
+          </td>
+          <td>
+            <label class="text-info">{{patientDOB}} (Age: {{patientAge}})</label>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
 </template>

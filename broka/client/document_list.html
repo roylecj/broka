@@ -18,12 +18,19 @@
                 {{/if}}
               {{else}}
                 {{#if notpasPatient}}
-                {{#if thisPatient}}
-                  <div class="jumbotron">
-                    <h1>Local UltraGenda Patient {{patid}}</h1>
-                    <p>This patient is not found on webPAS as they have been registered within UltraGenda.</p>
-                  </div>
-                {{/if}}
+                  {{#if thisPatient}}
+<!--
+                    <div class="jumbotron">
+                      <h1>Local UltraGenda Patient {{patid}}</h1>
+                      <p>This patient is not found on webPAS as they have been registered within UltraGenda.</p>
+                    </div>
+
+-->
+
+<!-- We need to display the iPM patient details -->
+
+                    {{> ipmPatientView patientId=this.patientId}}
+                  {{/if}}
                 {{/if}}
               {{/if}}
           {{/if}}
