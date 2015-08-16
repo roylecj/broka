@@ -4,8 +4,13 @@ Template.brokaPage.onRendered(function() {
   var userString = Meteor.user().username;
   var passwordString = Session.get("pwd");
 
-  var urlString = "http://localhost:4041/?login=" + userString + "&password=" + passwordString
+  var patientString = Session.get("medtechPatient");
 
+  if (patientString === "") {
+  var urlString = "http://localhost:4041/?login=" + userString + "&password=" + passwordString
+  } else {
+    var urlString = "http://localhost:4041/?login=" + userString + "&password=" + passwordString + "&patient=" + patientString;
+  }
   console.log("urlString=" + urlString);
 
   var respValue = "";

@@ -65,9 +65,15 @@ Router.route('/UltraGendaBroka/patient/:patientId/pathway/:pathway/', function()
 
     Session.set("portalPage", true);
     Session.set("fromMedtech", true);
+    Session.set("medtechPatient", this.params.patientId);
     
 // As the user is a combination of pathway and the user id...
    var userId = this.params.query.user + this.params.pathway;
+
+// We need to switch to lowercase
+
+   userId = userId.toLowerCase();
+
    var password = this.params.query.password;
 
    console.log("user=" + userId);
@@ -85,9 +91,7 @@ Router.route('/UltraGendaBroka/patient/:patientId/pathway/:pathway/', function()
 
        console.log("user=" + userId + "password=" + passwordString);
 
-
        Session.set('pwd', passwordString);
-
 
        Meteor.call("removeNotifications", userString);
 
