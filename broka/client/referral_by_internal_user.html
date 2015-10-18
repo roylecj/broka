@@ -1,7 +1,6 @@
-<template name="home">
-
+<template name="referralByInternalUser">
   <form class="main form page">
-    {{alertMessage}}
+
   <div class="form-group">
     <label class="control-label" for="loginName">Login</label>
     <div class="controls">
@@ -16,7 +15,19 @@
     </div>
   </div>
 
-  <input type="submit" value="{{loggingInText}}" class="btn {{loginButton}}"/>
-</form>
+{{#if practiceSet}}
+  <div class="form-group">
+    <label class="control-label" for="practice">Practice</label>
+    <div class="controls">
+      <select id="practice" class="form-control practiceCode">
+        {{#each practices}}
+        {{> practiceList}}
+        {{/each}}
+      </select>
+    </div>
+  </div>
+{{/if}}
 
+  <input type="submit" value="Submit" class="btn btn-primary"/>
+  </form>
 </template>

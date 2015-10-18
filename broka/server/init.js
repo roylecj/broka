@@ -81,6 +81,9 @@ Meteor.methods({
       console.log("item is flagged as read");
       ReferralStatus.update( {_id: messageId}, {$set: {readFlag: true}} );
     },
+    removeDocs: function(patId) {
+      Uploads.remove({patientId: patId}, true);
+    },
     getAccessToken: function(urlString) {
       // Session.set("accessToken", "");
 
@@ -94,6 +97,62 @@ Meteor.methods({
 
         return result;
       });
+    },
+    getGPpractices: function(urlString) {
+      this.unblock();
 
+      var respValue = "";
+      respValue = Meteor.call('callViaduct', urlString, function(e, result) {
+        console.log("response= " + result);
+
+        //Session.set("accessToken", result);
+
+        return result;
+      });
     }
 });
+
+// if (Practices.find().count() === 0) {
+
+  Practices.remove({});
+
+  Practices.insert({
+    userId: 'darm',
+    gpCode: 'darm',
+    practice: 'Ipswich Family Practice'
+  });
+
+  Practices.insert({
+    userId: 'darm',
+    gpCode: 'darm',
+    practice: 'Ipswich General Practice'
+  });
+
+  Practices.insert({
+    userId: 'darm',
+    gpCode: 'darm',
+    practice: 'Ipswich Plaza Practice'
+  });
+
+  GPS.insert({
+    gpName: 'Dennis Armstrong',
+    gpCode: 'darm'
+  });
+
+  GPS.insert({
+    gpName: 'Peter Armstrong',
+    gpCode: 'parm'
+  });
+
+  GPS.insert({
+    gpName: 'Jane Armstrong',
+    gpCode: 'jarm'
+  });
+
+  GPS.insert({
+    gpName: 'Jane Smith',
+    gpCode: 'jsmit'
+  });
+
+
+// };

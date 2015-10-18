@@ -18,7 +18,10 @@ Router.route('/read/:_id', function() {
 Router.route('/uploadItem/:name', function() {
   var response = this.response;
 
-  var idFromName = Uploads.findOne( {name : this.params.name });
+//  var idFromName = Uploads.findOne( {name : this.params.name });
+
+//  var idFromName = Uploads.find( {name: this.params.name}, {createdAt: -1}).limit(1);
+  var idFromName = Uploads.findOne( { $query: {name: this.params.name}, $orderby: { createdAt : -1 } } );
 
   console.log(idFromName._id);
   var fileNameExt = idFromName.name.split('.').pop();
@@ -31,6 +34,8 @@ Router.route('/documentList/', {
   name: 'documentList',
   data: function() {
     console.log("patient=" + this.params.query);
+
+// Meteor.call('removeDocs', this.params.query.patientId);
 
     Meteor.call('insertPatient', this.params.query.patientId);
     return PatientList.findOne({patientId: this.params.query.patientId});
@@ -55,6 +60,10 @@ Router.route('/referral/:userId/patient/:patientId/id/:seqId/notes/:notes', func
     this.response.end("DONE");
 }, {where: 'server'});
 
+Router.route('/internal', {
+    name: 'referralByInternalUser'
+});
+
 Router.route('/patientReview', {
     name: 'patientReviewPage'
 });
@@ -66,7 +75,7 @@ Router.route('/UltraGendaBroka/patient/:patientId/pathway/:pathway/', function()
     Session.set("portalPage", true);
     Session.set("fromMedtech", true);
     Session.set("medtechPatient", this.params.patientId);
-    
+
 // As the user is a combination of pathway and the user id...
    var userId = this.params.query.user + this.params.pathway;
 

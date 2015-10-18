@@ -1,7 +1,13 @@
 Template.brokaPage.onRendered(function() {
   console.log("inside BrokaPageURL");
 
-  var userString = Meteor.user().username;
+  var userString = "";
+
+  if (Session.get("oldMode")) {
+    userString = Meteor.user().username;
+  } else {
+    userString = Session.get("userName");
+  }
   var passwordString = Session.get("pwd");
 
   var patientString = Session.get("medtechPatient");

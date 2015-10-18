@@ -1,11 +1,26 @@
+Template.header.onCreated(function() {
+    Session.setDefault("gpCode", "");
+});
+
 Template.header.helpers({
+    currentUserEntered: function() {
+       if (Session.get("signedIn")) {
+         return true
+       } else {
+         return false
+       }
+    },
     currentUserName: function() {
       // return Meteor.user().username;
 
-      if (Meteor.user().profile.name) {
-        return Meteor.user().profile.name;
+      if (Session.get("oldMode")) {
+        if (Meteor.user().profile.name) {
+          return Meteor.user().profile.name;
+        } else {
+          return Meteor.user().username;
+        }
       } else {
-        return Meteor.user().username;
+        return Session.get("personName");
       }
     },
     signedIn: function() {
@@ -22,24 +37,42 @@ Template.header.helpers({
        }).count();
     },
     specificFormData: function() {
-      return {
-        userId: Meteor.user.userName
+
+      if (Session.get("oldMode")){
+        return {
+          userId: Meteor.user.userName
+          }
+      } else {
+        return {
+          userId: Session.get("userName")
         }
+      }
     },
     notificationCount: function() {
-      var countNotifications = Notifications.find( {userId: Meteor.user().username} ).count();
-
+      var countNotifications = 0;
+      if (Session.get("oldMode")) {
+        countNotifications = Notifications.find( {userId: Meteor.user().username} ).count();
+      } else {
+        countNotifications = Notifications.find( {userId: Session.get("userName")} ).count();
+      }
       return countNotifications;
     },
     statusUpdateCount: function() {
-
-       return ReferralStatus.find( {userId: Meteor.user().username, readFlag: false}).count();
+       if (Session.get("oldMode")) {
+         return ReferralStatus.find( {userId: Meteor.user().username, readFlag: false}).count();
+       } else {
+         return ReferralStatus.find( {userId: Session.get("userName"), readFlag: false}).count();
+       }
     },
     messageText: function() {
 
        var cnt = 0;
 
-       cnt = ReferralStatus.find( {userId: Meteor.user().username, readFlag: false}).count();
+       if (Session.get("oldMode")) {
+         cnt = ReferralStatus.find( {userId: Meteor.user().username, readFlag: false}).count();
+       } else {
+         cnt = ReferralStatus.find( {userId: Session.get("userName"), readFlag: false}).count();
+       }
         if (cnt == 1) {
           return cnt + " message";
         } else {
@@ -54,15 +87,55 @@ Template.header.helpers({
       }
     },
     messages: function() {
-      return ReferralStatus.find( {userId: Meteor.user().username, readFlag: false});
+      if (Session.get("oldMode")) {
+        return ReferralStatus.find( {userId: Meteor.user().username, readFlag: false});
+      } else {
+        return ReferralStatus.find( {userId: Session.get("oldMode"), readFlag: false});
+
+      }
     },
     notMedtech: function() {
       return !Session.get("fromMedtech");
-    }
+    },
+    isInternalUser: function() {
+      return true;
+    },
+    GP: function() {
+      console.log("filtering gps to " + Session.get("gpFilter"));
+      GPS.find({gpName: {$regex: Session.get("gpFilter"), $options: 'i'}}).fetch();
+    },
+    practiceItems: function() {
+      return Practices.find({gpCode: Session.get("gpCode")}).fetch();
+    },
+    gpPopulated: function() {
+      if (Session.get("gpCode")) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    acGPSettings: function() {
+   return {
+     position: "bottom",
+     limit: 5,
+     rules: [
+       {
+         collection: GPS,
+         field: "gpName",
+         options: 'i',
+         matchAll: true,
+         template: Template.gpItem
+       }
+     ]
+   };
+ }
  });
 
  Template.header.events({
     'click .buttonLogout': function(e) {
+
+      Session.set("gpCode", "");
+
       Meteor.logout(function() {
       // Redirect to login
       Router.go('home');
@@ -71,15 +144,32 @@ Template.header.helpers({
       return;
 
     },
+    "autocompleteselect input": function(event, template, doc) {
+      console.log("select " + doc);
+//      debugger
+      Session.set("gpCode", doc.gpCode);
+    },
     'click .sentButton': function(e) {
       // Remove the notifications so that we start from scratch again...
-      Meteor.call('removeNotifications', Meteor.user().username);
+      if (Session.get("oldMode")) {
+        Meteor.call('removeNotifications', Meteor.user().username);
+      } else {
+        Meteor.call('removeNotifications', Session.get("userName"));
+      }
     },
     'click .markRead': function(e) {
-      Meteor.call('markRead', Meteor.user().username);
+
+      if (Session.get("oldMode")) {
+        Meteor.call('markRead', Meteor.user().username);
+      } else {
+        Meteor.call('markRead', Session.get("userName"));
+      }
     },
     'click .goHome': function(e) {
       Session.set('accessToken', "");
       Router.go('brokaPage');
+    },
+    'submit form': function(e, template) {
+      e.preventDefault();
     }
  });

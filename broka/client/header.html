@@ -14,6 +14,28 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          {{#if signedIn}}
+            {{#if isInternalUser}}
+              <div class="nav navbar-nav navbar-left">
+              <form class="navbar-form" role="search">
+                <div class="form-group">
+                  {{> inputAutocomplete settings=acGPSettings id="gpCode" class="form-control" placeholder="GP"}}
+                </div>
+                {{#if gpPopulated}}
+                <div class="form-group">
+                  <select class="form-control">
+                  {{#each practiceItems}}
+                    {{> practiceItem}}
+                  {{/each}}
+                  </select>
+                </div>
+                {{/if}}
+<!--                <button type="submit" class="btn btn-default">Set</button> -->
+              </form>
+              </div>
+            {{/if}}
+          {{/if}}
+
           <ul class="nav navbar-nav navbar-right">
 
             <!-- {{> loginButtons}} -->
@@ -42,7 +64,14 @@
 
 <!-- {{>loginButtons}} -->
 
+
+
               {{#if currentUser}}
+                {{#if notMedtech}}
+                  <button class="btn btn-danger btn-sm buttonLogout">{{currentUserName}} Logout</button>
+                {{/if}}
+              {{/if}}
+              {{#if currentUserEntered}}
                 {{#if notMedtech}}
                   <button class="btn btn-danger btn-sm buttonLogout">{{currentUserName}} Logout</button>
                 {{/if}}

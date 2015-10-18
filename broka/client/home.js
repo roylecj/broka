@@ -6,54 +6,97 @@ Template.home.onCreated(function() {
     Session.set('signedIn', false);
 });
 
+Template.home.helpers({
+    alertMessage: function() {
+      if (Session.get("errorMessage")) {
+        sAlert.error(Session.get("errorMessage"), alertConfiguration);
+        Session.set("errorMessage", "");
+      }
+    },
+    loginButton: function() {
+      if (Session.get("loggingIn")) {
+        return "disabled"
+      } else {
+        return "btn-primary"
+      }
+    },
+    loggingInText: function() {
+      if (Session.get("loggingIn")) {
+        return "Logging In..."
+      } else {
+        return "Login"
+      }
+    }
+});
 Template.home.events({
   'submit form': function(e) {
     e.preventDefault();
 
+    Session.set("loggingIn", true);
+
     Session.set("fromMedtech", false);
+    Session.set("medtechPatient", "");
     Session.set("portalPage", true);
 
     var userId =  $(e.target).find('[name=loginName]').val();
     var password = $(e.target).find('[name=password]').val();
 
-    Meteor.loginWithPassword(userId, password, function(e) {
-        console.log("logging in with " + userId);
+    Session.set("oldMode", false);
 
-        console.log(e);
+    if (Session.get("oldMode")) {
+      Meteor.loginWithPassword(userId, password, function(e) {
+          console.log("logging in with " + userId);
 
-        Session.set('signedIn', true);
+          console.log(e);
 
-        var userString = userId;
-        var passwordString = password;
+          Session.set('signedIn', true);
+          Session.set("loggingIn", false);
+          var userString = userId;
+          var passwordString = password;
 
-        console.log("user=" + userId + "password=" + passwordString);
+          console.log("user=" + userId + "password=" + passwordString);
+          Session.set('pwd', passwordString);
 
-//        var urlString = "http://localhost:4041/?login=" + userString + "&password=" + passwordString
+          Meteor.call("removeNotifications", userString);
 
-        Session.set('pwd', passwordString);
+          Session.set("accessToken", "");
 
-//        console.log(urlString);
+          Router.go("brokaPage");
+      });
+    } else {
 
-        Meteor.call("removeNotifications", userString);
+      var urlString = "http://localhost:1025/?login=" + userId + "&password=" + password + "&accessType=4";
+      var respValue = "";
 
-//        debugger
+      respValue = Meteor.call('callViaduct', urlString, function(e, result) {
+        console.log("response= " + result);
 
-        Session.set("accessToken", "");
+        if (result === "INVALID") {
+          Session.set("errorMessage", "Invalid Credentials - check username / password and role");
+          console.log(result);
+          Session.set("loggingIn", false);
+        } else {
+          Session.set("loggingIn", false);
+          // PErson Name is Dennis Armstrong...
+          Session.set("personName", result);
 
-/*
-        var respValue = "";
-        respValue = Meteor.call('callViaduct', urlString, function(e, result) {
-          console.log("response= " + result);
+          Session.set('signedIn', true);
+          var userString = userId;
+          var passwordString = password;
 
-          Session.set("accessToken", result);
-          Router.go('brokaPage');
-        });
-*/
-        Router.go("brokaPage");
+          console.log("user=" + userId + "password=" + passwordString);
+          Session.set("userName", userString);
+          Session.set('pwd', passwordString);
 
-        // if (Session.get("accessToken") !== "") {
+          Meteor.call("removeNotifications", userString);
 
-        // }
+          Session.set("accessToken", "");
+
+          Router.go("brokaPage");
+        }
+
     });
+
+    }
   }
 })
