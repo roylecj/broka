@@ -12,6 +12,10 @@ Template.brokaPage.onRendered(function() {
 
   var patientString = Session.get("medtechPatient");
 
+// userString = "ASHINE";
+// passwordString = "MEDTECH123";
+// patientString="100037";
+
   if (patientString === "") {
   var urlString = "http://localhost:4041/?login=" + userString + "&password=" + passwordString
   } else {

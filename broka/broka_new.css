@@ -1,0 +1,11 @@
+.navbar-brand1 {
+  float: left;
+  padding: 14.5px 15px;
+  font-size: 19px;
+  line-height: 21px;
+  height: 50px;
+}
+.navbar-brand1:hover,
+.navbar-brand1 > img {
+  display: block;
+}

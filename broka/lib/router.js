@@ -5,6 +5,9 @@ Router.configure({
 
 Router.route('/', {name: 'home'});
 Router.route('/broka', {name: 'brokaPage'});
+Router.route('/patientPortalPage', {name: 'patientBrokaPage'});
+Router.route('/brokaPatient', {name: 'brokaPatient'});
+
 Router.route('/upload/:_id', {
   name: 'upload',
   data: function() {
@@ -14,6 +17,37 @@ Router.route('/upload/:_id', {
 Router.route('/read/:_id', function() {
   Meteor.call('readItem', this.params._id);
 }, {where: 'server', name: 'readItem'});
+
+Router.route('/patientOnlyPortal/:patientId', function() {
+
+  Session.set("userName", "ASHINE");
+  Session.set("pwd", "MEDTECH123");
+  Session.set("medtechPatient", "100037");
+
+// userString = "ASHINE";
+// passwordString = "MEDTECH123";
+// patientString="100037";
+  Router.go('brokaPage');
+  this.response.end("HERE");
+  this.next();
+}, {name: 'patientOnlyPortalAccess'});
+
+Router.route('/mmh', {name: 'mmhPage', layoutTemplate: 'mmhLayout'});
+
+Router.route('/patientPortal/:patientId', function() {
+  console.log("CORRECT");
+  Session.set("userName", "58AZ 3HHJ");
+  Session.set("dob", "1945-01-04");
+  Session.set("sex", "F");
+  Session.set("medtechPatient", "100037");
+
+// userString = "ASHINE";
+// passwordString = "MEDTECH123";
+// patientString="100037";
+  Router.go('patientBrokaPage');
+  this.response.end("HERE");
+  this.next();
+}, {name: 'patientPortalAccess'});
 
 Router.route('/uploadItem/:name', function() {
   var response = this.response;
@@ -70,6 +104,7 @@ Router.route('/patientReview', {
 
 Router.route('/UltraGendaBroka/patient/:patientId/pathway/:pathway/', function() {
 
+console.log("Inside broka");
 // We need to set the portal page flag so that we can add attachments...
 
     Session.set("portalPage", true);
@@ -103,7 +138,6 @@ Router.route('/UltraGendaBroka/patient/:patientId/pathway/:pathway/', function()
        Session.set('pwd', passwordString);
 
        Meteor.call("removeNotifications", userString);
-
 
        Session.set("accessToken", "");
 
@@ -164,3 +198,11 @@ Router.route('/rfa/', function() {
 Router.route("/rfaPage", {
     name: 'rfaPage'
 });
+
+Router.route("/obs", {
+    name: "observationSample"
+});
+
+Router.route("/hw", {
+    name: "heightWeight"
+})

@@ -1,0 +1,35 @@
+<template name="observationSample">
+  <form class="main form page">
+
+    <div class="form-group">
+      <label class="control-label" for="temp">Temperature</label>
+      <div class="controls">
+          <input name="temp" id="temp" type="number" value="" placeholder="" class="form-control"/>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <label class="control-label" for="loginName">Pulse</label>
+    <div class="controls">
+        <input name="loginName" id="loginName" type="number" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="passowrd">Respiration</label>
+    <div class="controls">
+        <input name="password" id="password" type="number" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="bpSys">BP</label>
+    <div class="controls input-group">
+        <input name="bpSys" id="bpSys" type="number" value="" placeholder="" class="form-control"/>
+        <span class="input-group-addon">/</span>
+        <input name="bpDiaSys" id="bpDiaSys" type="number" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+  <input type="submit" value="Save" class="btn btn-sm btn-primary"/>
+</form>
+</template>

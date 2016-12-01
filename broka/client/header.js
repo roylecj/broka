@@ -1,5 +1,6 @@
 Template.header.onCreated(function() {
     Session.setDefault("gpCode", "");
+    Session.setDefault("showFavorites", "");
 });
 
 Template.header.helpers({
@@ -9,6 +10,13 @@ Template.header.helpers({
        } else {
          return false
        }
+    },
+    starState: function() {
+      if (Session.get("showFavorites")) {
+        return "glyphicon glyphicon-star"
+      } else {
+        return "glyphicon glyphicon-star-empty"
+      }
     },
     currentUserName: function() {
       // return Meteor.user().username;
@@ -86,6 +94,13 @@ Template.header.helpers({
         return false;
       }
     },
+    isPatientPortal: function() {
+      if (Session.get("patientPortal")) {
+        return true
+      } else {
+        return false
+      }
+    },
     messages: function() {
       if (Session.get("oldMode")) {
         return ReferralStatus.find( {userId: Meteor.user().username, readFlag: false});
@@ -144,6 +159,9 @@ Template.header.helpers({
       return;
 
     },
+    'click .btnLogoutPatient': function(e, t) {
+      Router.go("brokaPatient");
+    },
     "autocompleteselect input": function(event, template, doc) {
       console.log("select " + doc);
 //      debugger
@@ -155,6 +173,13 @@ Template.header.helpers({
         Meteor.call('removeNotifications', Meteor.user().username);
       } else {
         Meteor.call('removeNotifications', Session.get("userName"));
+      }
+    },
+    'click .btnQuickPatient': function(e, t) {
+      if (Session.get("showFavorites")) {
+        Session.set("showFavorites", false);
+      } else {
+        Session.set("showFavorites", true);
       }
     },
     'click .markRead': function(e) {

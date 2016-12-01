@@ -1,0 +1,33 @@
+<template name="heightWeight">
+  <form class="main form page">
+
+    <div class="form-group">
+      <label class="control-label" for="temp">Height (cm)</label>
+      <div class="controls">
+          <input name="hght" id="hght" type="number" value="" placeholder="" class="form-control"/>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <label class="control-label" for="loginName">Weight (kg)</label>
+    <div class="controls">
+        <input name="w" id="w" type="number" value="" placeholder="" class="form-control wght"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="pmiCalc">BMI</label>
+    <div class="controls">
+        <input name="bmiCalc" id="bmiCalc" type="number" value="{{bmiValue}}" placeholder="" class="form-control" disabled=""/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="bsaCalc">BSA</label>
+    <div class="controls">
+        <input name="bsaCalc" id="bsaCalc" type="number" value="{{bsaValue}}" placeholder="" class="form-control" disabled=""/>
+    </div>
+  </div>
+</form>
+
+</template>
