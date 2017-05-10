@@ -19,10 +19,10 @@ Router.route('/read/:_id', function() {
 }, {where: 'server', name: 'readItem'});
 
 Router.route('/patientOnlyPortal/:patientId', function() {
-
-  Session.set("userName", "ASHINE");
-  Session.set("pwd", "MEDTECH123");
-  Session.set("medtechPatient", "100037");
+console.log("ENDPOINT=patientOnlyPortal");
+  Session.set("userName", "DCLARK");
+  Session.set("pwd", "DCLARK");
+  Session.set("medtechPatient", "245728");
 
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
@@ -34,8 +34,41 @@ Router.route('/patientOnlyPortal/:patientId', function() {
 
 Router.route('/mmh', {name: 'mmhPage', layoutTemplate: 'mmhLayout'});
 
+Router.route('/patientPortalNOTUSED/:patientId', function() {
+console.log("ENDPOINT=patientPortal");
+  Session.set("userName", "DCLARK");
+  Session.set("pwd", "DCLARK");
+  Session.set("medtechPatient", "245728");
+
+// userString = "ASHINE";
+// passwordString = "MEDTECH123";
+// patientString="100037";
+  Router.go('brokaPage');
+  this.response.end("HERE");
+  this.next();
+}, {name: 'patientPortalAccessOLD'});
+
 Router.route('/patientPortal/:patientId', function() {
   console.log("CORRECT");
+  console.log("ENDPOINT=patientPortalNOTUSED");
+  Session.set("userName", "9A2M 7MV3");
+  Session.set("dob", "1951-09-01");
+  Session.set("sex", "M");
+  Session.set("medtechPatient", "245728");
+
+// userString = "ASHINE";
+// passwordString = "MEDTECH123";
+// patientString="100037";
+console.log("routing to patientBrokaPage");
+
+  Router.go('patientBrokaPage');
+  this.response.end("HERE");
+  this.next();
+}, {name: 'patientPortalAccess'});
+
+Router.route('/patientPortalNOTUSEDOLD/:patientId', function() {
+  console.log("CORRECT");
+  console.log("ENDPOINT=patientPortal");
   Session.set("userName", "58AZ 3HHJ");
   Session.set("dob", "1945-01-04");
   Session.set("sex", "F");
@@ -47,7 +80,7 @@ Router.route('/patientPortal/:patientId', function() {
   Router.go('patientBrokaPage');
   this.response.end("HERE");
   this.next();
-}, {name: 'patientPortalAccess'});
+}, {name: 'patientPortalAccess3'});
 
 Router.route('/uploadItem/:name', function() {
   var response = this.response;
