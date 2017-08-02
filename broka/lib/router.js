@@ -5,6 +5,7 @@ Router.configure({
 
 Router.route('/', {name: 'home'});
 Router.route('/broka', {name: 'brokaPage'});
+Router.route('/brokaNew', {name: 'homeNew', layoutTemplate: 'layoutNew'});
 Router.route('/patientPortalPage', {name: 'patientBrokaPage'});
 Router.route('/brokaPatient', {name: 'brokaPatient'});
 
@@ -20,13 +21,14 @@ Router.route('/read/:_id', function() {
 
 Router.route('/patientOnlyPortal/:patientId', function() {
 console.log("ENDPOINT=patientOnlyPortal");
-  Session.set("userName", "DCLARK");
-  Session.set("pwd", "DCLARK");
+  Session.set("userName", "dclark");
+  Session.set("pwd", "dclark");
   Session.set("medtechPatient", "245728");
 
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
 // patientString="100037";
+  Session.set("brokaSite", "10.2.0.7");
   Router.go('brokaPage');
   this.response.end("HERE");
   this.next();
@@ -34,15 +36,68 @@ console.log("ENDPOINT=patientOnlyPortal");
 
 Router.route('/mmh', {name: 'mmhPage', layoutTemplate: 'mmhLayout'});
 
+Router.route('/bpac/patient/:patientId/pathway/:pathway/', function() {
+
+  console.log("Inside broka");
+// We need to set the portal page flag so that we can add attachments...
+
+    Session.set("brokaSite", "52.255.45.28");
+    Session.set("ohcSite", "52.255.63.1");
+    Session.set("portalPage", true);
+    Session.set("fromMedtech", true);
+    Session.set("medtechPatient", this.params.patientId);
+
+// As the user is a combination of pathway and the user id...
+   var userId = this.params.query.user + this.params.pathway;
+
+// We need to switch to lowercase
+
+   // userId = userId.toLowerCase();
+
+   var password = this.params.query.password;
+
+   console.log("user=" + userId);
+   console.log("password=" + password);
+
+//   Meteor.loginWithPassword(userId, password, function(e) {
+       console.log("logging in with " + userId);
+
+//       console.log(e);
+
+       Session.set('signedIn', true);
+
+       var userString = userId;
+       var passwordString = password;
+
+       console.log("user=" + userId + "password=" + passwordString);
+       console.log("userName setting set to " + userId);
+       Session.set("userName", userId);
+       Session.set('pwd', passwordString);
+
+//       Meteor.call("removeNotifications", userString);
+
+       Session.set("accessToken", "");
+
+       Router.go("brokaPage");
+//     });
+
+   console.log("in broka");
+ }, {
+   name: 'bpacNavigator'
+ }
+);
+
 Router.route('/patientPortalNOTUSED/:patientId', function() {
-console.log("ENDPOINT=patientPortal");
-  Session.set("userName", "DCLARK");
-  Session.set("pwd", "DCLARK");
+  console.log("ENDPOINT=patientPortal");
+  Session.set("userName", "dclark");
+  Session.set("pwd", "dclark");
   Session.set("medtechPatient", "245728");
 
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
 // patientString="100037";
+Session.set("brokaSite", "10.2.0.7");
+Session.set("ohcSite", "10.2.0.8");
   Router.go('brokaPage');
   this.response.end("HERE");
   this.next();
@@ -59,6 +114,9 @@ Router.route('/patientPortal/:patientId', function() {
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
 // patientString="100037";
+Session.set("brokaSite", "10.2.0.7");
+Session.set("ohcSite", "10.2.0.8");
+
 console.log("routing to patientBrokaPage");
 
   Router.go('patientBrokaPage');
@@ -77,6 +135,8 @@ Router.route('/patientPortalNOTUSEDOLD/:patientId', function() {
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
 // patientString="100037";
+Session.set("brokaSite", "10.2.0.7");
+Session.set("ohcSite", "10.2.0.8");
   Router.go('patientBrokaPage');
   this.response.end("HERE");
   this.next();
@@ -174,6 +234,8 @@ console.log("Inside broka");
 
        Session.set("accessToken", "");
 
+Session.set("brokaSite", "10.2.0.7");
+Session.set("ohcSite", "10.2.0.8");
        Router.go("brokaPage");
      });
 

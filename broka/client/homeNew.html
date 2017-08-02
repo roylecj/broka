@@ -1,0 +1,22 @@
+<template name="homeNew">
+
+  <form class="main form page">
+    {{alertMessage}}
+  <div class="form-group">
+    <label class="control-label" for="loginName">Login</label>
+    <div class="controls">
+        <input name="loginName" id="loginName" type="text" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="passowrd">Password</label>
+    <div class="controls">
+        <input name="password" id="password" type="password" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <input type="submit" value="{{loggingInText}}" class="btn {{loginButton}}"/>
+</form>
+
+</template>

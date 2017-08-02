@@ -2,11 +2,11 @@ Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY'
 });
 
-Template.home.onCreated(function() {
+Template.homeNew.onCreated(function() {
     Session.set('signedIn', false);
 });
 
-Template.home.helpers({
+Template.homeNew.helpers({
     alertMessage: function() {
       if (Session.get("errorMessage")) {
         sAlert.error(Session.get("errorMessage"), alertConfiguration);
@@ -28,7 +28,7 @@ Template.home.helpers({
       }
     }
 });
-Template.home.events({
+Template.homeNew.events({
   'submit form': function(e) {
     e.preventDefault();
 
