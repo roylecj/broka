@@ -9,7 +9,7 @@ Template.patientBrokaPage.onRendered(function() {
   var sexString = Session.get("sex");
   var patientString = Session.get("medtechPatient");
 
-  var urlString = "http://10.2.0.8:4044/?passcode=" + userString + "&patient=" + patientString + "&birthdate=" + dobString + "&sex=" + sexString;
+  var urlString = "http://10.1.1.63:4044/?passcode=" + userString + "&patient=" + patientString + "&birthdate=" + dobString + "&sex=" + sexString;
 
   console.log("urlString=" + urlString);
 
@@ -37,7 +37,7 @@ Template.patientBrokaPage.onRendered(function() {
 Template.patientBrokaPage.helpers({
     brokaPageURL: function() {
       // Need to call the broka service to get an access token first... and then
-      var urlString = "http://10.2.0.7/ultragendabroka/patient/default.aspx?accesstoken=" + Session.get("accessToken");
+      var urlString = "https://schedulingdemo.healthhost.net/ultragendabroka/patient/default.aspx?accesstoken=" + Session.get("accessToken");
 
       return urlString;
     },

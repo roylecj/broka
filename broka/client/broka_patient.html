@@ -1,6 +1,7 @@
 <template name="brokaPatient">
 
-    <form class="main form page">
+    <form class="main form page form-signin">
+<!--
     <div class="form-group">
       <label class="control-label" for="patientId">Patient Id</label>
       <div class="controls">
@@ -34,4 +35,52 @@
 
     <input type="submit" value="{{loggingInText}}" class="btn {{loginButton}}"/>
   </form>
+-->
+
+  <div class="container">
+    <img src="dxc_symbol_wht_rgb_300.png" class="navbar-brand"/>
+      <div class="card card-container">
+          <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+          <p id="profile-name" class="profile-name-card">Lorenzo Care Logistics Patient Login</p>
+		<p id="profile-welcome" class="profile-welcome">Welcome to Lorenzo Care Logistics Patient Portal</p>
+
+    <div class="form-group">
+      <label class="control-label" for="patientId">Patient Id</label>
+      <div class="controls">
+          <input name="patientId" id="patientId" type="text" value="" placeholder="" class="form-control"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="accessCode">Access Code</label>
+      <div class="controls">
+          <input name="accessCode" id="accessCode" type="password" value="" placeholder="" class="form-control"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="patientSex">Sex</label>
+      <div class="controls">
+               <select class="form-control" name="patientSex">
+             <option value=""></option>
+             <option value="F">Female</option>
+             <option value="M">Male</option>
+             <option value="U">Unknown</option>
+         </select>
+       </div>
+    </div>
+
+    <label class="control-label" for="patientDOB">Date of Birth</label>
+
+    <div class="input-group datepicker">
+
+      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      <input name="patientDOB" class="patientDOB form-control" type="text"/>
+    </div>
+
+              <input type="submit" class="btn btn-lg {{loginButton}} btn-block btn-signin" value="{{loggingInText}}" />
+		<p id="profile-welcome" class="profile-welcome">&copy; DXC.Technology 2017</p>
+      </div><!-- /card-container -->
+  </div><!-- /container -->
+</form>
 </template>

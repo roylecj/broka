@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--Generated using 'NEHTA Vendor Library - CDA' version 4.0.1.0-->
+<!--The following template Packages are supported for eReferral: .13 (1A) .14 (1B) .15 (2) .16 (3A) .17 (3B) .18 (1A) .19 (1B) .20 (2) .21 (3A) .22 (3B)-->
+<?xml-stylesheet href="VSRF_NEHTA_Generic_CDA_Stylesheet-1.1.0.5_IEMML.xsl" type="text/xsl"?>
+<ClinicalDocument xmlns:ext="http://ns.electronichealth.net.au/Ci/Cda/Extensions/3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3">
+  <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040" />
+  <templateId root="1.2.36.1.2001.1001.101.100.1002.2" extension="2.2" />
+  <templateId root="1.2.36.1.2001.1001.100.149" extension="1.0" />
+  <id root="fb4901f3-9689-4bfc-813a-ce367dfc5244" />
+  <code code="57133-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Referral note" />
+  <title>e-Referral</title>
+  <effectiveTime value="20170731153235" />
+  <confidentialityCode nullFlavor="NA" />
+  <languageCode code="en-AU" />
+  <setId root="24c99567-7dc2-4578-9a72-234a333f7eed" />
+  <versionNumber value="1" />
+  <ext:completionCode code="F" codeSystem="1.2.36.1.2001.1001.101.104.20104" codeSystemName="NCTIS Document Status Values" displayName="Final" />
+  <recordTarget typeCode="RCT">
+    <patientRole classCode="PAT">
+      <id root="33adbd3e-0433-4448-84df-ff288c1745cf" />
+      <addr use="H">
+        <country>Australia</country>
+        <postalCode>4670</postalCode>
+        <streetAddressLine>2 Kennedy Road</streetAddressLine>
+        <streetAddressLine>Bundaberg</streetAddressLine>
+      </addr>
+      <telecom value="tel:Not provided" use="H" />
+      <patient>
+        <name use="L">
+          <family>Andrews</family>
+          <given>Jennifer</given>
+        </name>
+        <name use="P">
+          <family>Andrews</family>
+          <given>Jennifer</given>
+        </name>
+        <administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.13.68" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" displayName="Female" />
+        <birthTime value="19700420" />
+        <ethnicGroupCode code="9" codeSystem="2.16.840.1.113883.3.879.291036" codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described" />
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.5001.1.0.7.1" extension="3500265121" assigningAuthorityName="Medicare Card Number" />
+          <ext:code code="MC" codeSystem="2.16.840.1.113883.12.203" codeSystemName="Identifier Type (HL7)" />
+        </ext:asEntityIdentifier>
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.5001.1.0.7" extension="35002651211" assigningAuthorityName="Individual Medicare Card Number" />
+          <ext:code code="MC" codeSystem="2.16.840.1.113883.12.203" codeSystemName="Identifier Type (HL7)" />
+        </ext:asEntityIdentifier>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <author typeCode="AUT">
+    <time value="20170731153235" />
+    <assignedAuthor>
+      <id root="03ee533d-9cbb-47d7-bbbc-30da0091962e" />
+      <code code="253111" codeSystem="2.16.840.1.113883.13.62" codeSystemName="1220.0 - ANZSCO - Australian and New Zealand Standard Classification of Occupations, First Edition, 2006" displayName="General Medical Practitioner" />
+      <addr use="WP">
+        <country>Australia</country>
+        <postalCode>2601</postalCode>
+        <streetAddressLine>1030 Practice Address</streetAddressLine>
+        <streetAddressLine>Test Address 21</streetAddressLine>
+        <streetAddressLine>City</streetAddressLine>
+      </addr>
+      <telecom value="tel:Not provided" use="WP" />
+      <assignedPerson>
+        <name use="L">
+          <family>Admins</family>
+          <given>Admins</given>
+          <prefix>Ms</prefix>
+        </name>
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.2001.1003.0." assigningAuthorityName="HPI-I" />
+          <ext:assigningGeographicArea classCode="PLC">
+            <ext:name>National Identifier</ext:name>
+          </ext:assigningGeographicArea>
+        </ext:asEntityIdentifier>
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.174030967.0.2" extension="2426621B" assigningAuthorityName="Medicare Provider Number" />
+          <ext:code code="PRN" codeSystem="2.16.840.1.113883.12.203" codeSystemName="Identifier Type (HL7)" />
+        </ext:asEntityIdentifier>
+        <ext:asEmployment classCode="EMP">
+          <ext:employerOrganization>
+            <id root="65a84227-5053-4967-bbe7-2b92e533f6e2" />
+            <asOrganizationPartOf>
+              <wholeOrganization>
+                <name use="ORGL">Main Practices</name>
+                <ext:asEntityIdentifier classCode="IDENT">
+                  <ext:id root="1.2.36.1.2001.1003.0.bpac::bpac-victoria-tester" assigningAuthorityName="HPI-O" />
+                  <ext:assigningGeographicArea classCode="PLC">
+                    <ext:name>National Identifier</ext:name>
+                  </ext:assigningGeographicArea>
+                </ext:asEntityIdentifier>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </ext:employerOrganization>
+        </ext:asEmployment>
+      </assignedPerson>
+    </assignedAuthor>
+  </author>
+  <custodian>
+    <assignedCustodian>
+      <representedCustodianOrganization>
+        <id root="4efabf65-ac5e-4952-a272-891c07d5918e" />
+        <name>Main Practices</name>
+        <telecom value="tel:Not provided" use="WP" />
+        <addr use="WP">
+          <country>Australia</country>
+          <postalCode>2601</postalCode>
+          <streetAddressLine>1030 Practice Address</streetAddressLine>
+          <streetAddressLine>Test Address 21</streetAddressLine>
+          <streetAddressLine>City</streetAddressLine>
+        </addr>
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.2001.1003.0.bpac::bpac-victoria-tester" assigningAuthorityName="HPI-O" />
+          <ext:assigningGeographicArea classCode="PLC">
+            <ext:name>National Identifier</ext:name>
+          </ext:assigningGeographicArea>
+        </ext:asEntityIdentifier>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <informationRecipient>
+    <intendedRecipient>
+      <id root="9d9978df-4c0a-4270-b3c3-8db4b833d9d4" />
+      <addr use="WP">
+        <country>Australia</country>
+        <streetAddressLine>Austin Health</streetAddressLine>
+        <streetAddressLine>Heidelberg</streetAddressLine>
+        <streetAddressLine>Outpatients</streetAddressLine>
+        <streetAddressLine>145 Studley Rd</streetAddressLine>
+        <streetAddressLine>Heidelberg</streetAddressLine>
+      </addr>
+      <telecom value="tel:9496 2444" use="WP" />
+      <informationRecipient>
+        <name>
+          <family>A/Prof Omar Farouque</family>
+        </name>
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.2001.1003.0.8003622500035358" assigningAuthorityName="HPI-O" />
+          <ext:assigningGeographicArea classCode="PLC">
+            <ext:name>National Identifier</ext:name>
+          </ext:assigningGeographicArea>
+        </ext:asEntityIdentifier>
+      </informationRecipient>
+      <receivedOrganization>
+        <name>Heidelberg</name>
+      </receivedOrganization>
+    </intendedRecipient>
+  </informationRecipient>
+  <legalAuthenticator>
+    <time value="20170731153327" />
+    <signatureCode code="S" />
+    <assignedEntity>
+      <id root="b5777295-bc01-405f-9752-9afa2a8b4a3e" />
+      <assignedPerson />
+    </assignedEntity>
+  </legalAuthenticator>
+  <participant typeCode="REFT">
+    <associatedEntity classCode="PROV">
+      <id root="1043df85-4603-4d9d-903b-968ccbbe1820" />
+      <code>
+        <originalText>referee</originalText>
+      </code>
+      <addr use="WP">
+        <country>Australia</country>
+        <streetAddressLine>Austin Health</streetAddressLine>
+        <streetAddressLine>Heidelberg</streetAddressLine>
+        <streetAddressLine>Outpatients</streetAddressLine>
+        <streetAddressLine>145 Studley Rd</streetAddressLine>
+        <streetAddressLine>Heidelberg</streetAddressLine>
+      </addr>
+      <telecom value="tel:9496 2444" use="WP" />
+      <associatedPerson>
+        <name>
+          <family>A/Prof Omar Farouque</family>
+        </name>
+        <ext:asEntityIdentifier classCode="IDENT">
+          <ext:id root="1.2.36.1.2001.1003.0." assigningAuthorityName="HPI-I" />
+          <ext:assigningGeographicArea classCode="PLC">
+            <ext:name>National Identifier</ext:name>
+          </ext:assigningGeographicArea>
+        </ext:asEntityIdentifier>
+        <ext:asEmployment classCode="EMP">
+          <ext:employerOrganization>
+            <id root="892fe6c3-e8f3-4ee5-a64d-67be0909d0f1" />
+            <asOrganizationPartOf>
+              <wholeOrganization>
+                <name>Heidelberg</name>
+                <ext:asEntityIdentifier classCode="IDENT">
+                  <ext:id root="1.2.36.1.2001.1003.0.8003622500035358" assigningAuthorityName="HPI-O" />
+                  <ext:assigningGeographicArea classCode="PLC">
+                    <ext:name>National Identifier</ext:name>
+                  </ext:assigningGeographicArea>
+                </ext:asEntityIdentifier>
+              </wholeOrganization>
+            </asOrganizationPartOf>
+          </ext:employerOrganization>
+        </ext:asEmployment>
+      </associatedPerson>
+    </associatedEntity>
+  </participant>
+  <component>
+    <structuredBody>
+      <component>
+        <section>
+          <id root="0d7b8f9c-147c-4868-882f-2dfb4f8bfd4f" />
+          <code code="102.16347" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Referral Detail" />
+          <title>Referral Detail</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table>
+              <caption>Reason for Referral</caption>
+              <tbody>
+                <tr>
+                  <td>BPAC Testing</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <caption>Date and Duration</caption>
+              <thead>
+                <tr>
+                  <th styleCode="halfPageWidth">Date</th>
+                  <th styleCode="halfPageWidth">Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>31 Jul 2017 15:32:35</td>
+                  <td>12 month(s)</td>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <id root="941abb2d-6d05-4ec6-bd1a-e9ac1bc058e0" />
+              <code code="103.16622" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Referral Validity Duration" />
+              <value xsi:type="IVL_TS">
+                <width value="12" unit="mo" />
+              </value>
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <id root="c2cdf61c-ebdb-4134-82c1-34daa899ac10" />
+              <code code="103.16620" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Referral DateTime" />
+              <value xsi:type="TS" value="20170731153235" />
+            </observation>
+          </entry>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <id root="99f5b35d-bfad-430d-8172-dcbc195660c5" />
+              <code code="42349-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Reason for referral" />
+              <effectiveTime value="20170731153235" />
+              <value xsi:type="ST">BPAC Testing</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <id root="63e5331e-0e37-4f93-bee6-475e70053f4c" />
+          <code code="101.20113" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Adverse Reactions" />
+          <title>Adverse Reactions</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table>
+              <caption>Adverse Reactions</caption>
+              <thead>
+                <tr>
+                  <th styleCode="halfPageWidth">Substance/Agent</th>
+                  <th styleCode="halfPageWidth">Reactions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Alkylating antineoplastic agent</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Paracetamol</td>
+                  <td>
+                    <list>
+                      <item>Anaphylaxis</item>
+                    </list>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry>
+            <act classCode="ACT" moodCode="EVN">
+              <id root="ceac2edc-3344-4e86-aff0-966a7dbc678a" />
+              <code code="102.15517" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Adverse Reaction" />
+              <participant typeCode="CAGNT">
+                <participantRole>
+                  <playingEntity>
+                    <code>
+                      <originalText>Alkylating antineoplastic agent</originalText>
+                    </code>
+                  </playingEntity>
+                </participantRole>
+              </participant>
+            </act>
+          </entry>
+          <entry>
+            <act classCode="ACT" moodCode="EVN">
+              <id root="2f06458f-6182-4726-b222-45f7d9c1cc27" />
+              <code code="102.15517" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Adverse Reaction" />
+              <participant typeCode="CAGNT">
+                <participantRole>
+                  <playingEntity>
+                    <code>
+                      <originalText>Paracetamol</originalText>
+                    </code>
+                  </playingEntity>
+                </participantRole>
+              </participant>
+              <entryRelationship typeCode="CAUS">
+                <observation classCode="OBS" moodCode="EVN">
+                  <id root="cd8ca752-c272-43c8-acba-d3b2e04999fd" />
+                  <code code="102.16474" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Reaction Event" />
+                  <entryRelationship typeCode="MFST" inversionInd="true">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <id root="d990f58a-72d4-4357-90c4-707456c9f2a9" />
+                      <code>
+                        <originalText>Anaphylaxis</originalText>
+                      </code>
+                    </observation>
+                  </entryRelationship>
+                </observation>
+              </entryRelationship>
+            </act>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <id root="307906e3-be34-41bd-9f1f-5fb0a564025f" />
+          <code code="101.16146" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Medications" />
+          <title>Medications</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table>
+              <caption>Medications</caption>
+              <thead>
+                <tr>
+                  <th>Start Date</th>
+                  <th>Medication</th>
+                  <th>Indication</th>
+                  <th>Directions</th>
+                  <th>Strength</th>
+                  <th>Dose</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+            </table>
+          </text>
+        </section>
+      </component>
+      <component>
+        <section>
+          <id root="e2633c8f-fd76-4bae-a92d-99e04c8b67b1" />
+          <code code="101.16117" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Medical History" />
+          <title>Medical History</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table>
+              <caption>Medical History</caption>
+              <thead>
+                <tr>
+                  <th styleCode="halfPageWidth">Item</th>
+                  <th styleCode="halfPageWidth">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Back and leg pain</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry>
+            <observation classCode="OBS" moodCode="EVN">
+              <id root="65d0e3d2-6920-42d3-9f92-78a8b713065d" />
+              <code code="282291009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT-AU" displayName="Diagnosis interpretation" />
+              <value xsi:type="CD">
+                <originalText>Back and leg pain</originalText>
+              </value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <id root="c134f06b-e00e-4513-b3c4-fb3ba75d4284" />
+          <code code="101.20117" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Diagnostic Investigations" />
+          <title>Diagnostic Investigations</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <paragraph>This section may contain the following subsections Pathology Test Result, Imaging Examination Result and Requested Service(s).</paragraph>
+          </text>
+        </section>
+      </component>
+      <component>
+        <section>
+          <id root="efd4084f-441e-4926-ba43-04a0607e7ad1" />
+          <code code="101.16638" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Immunisations" />
+          <title>Immunisations</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table>
+              <caption>Immunisations - Administered Immunisations</caption>
+              <thead>
+                <tr>
+                  <th>Vaccine</th>
+                  <th>Sequence Number</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Afluria Quad</td>
+                  <td>1</td>
+                  <td>15 Jun 2017</td>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="EVN">
+              <id root="0fcfe27f-1bbe-436b-8503-16e8bc33989e" />
+              <effectiveTime value="20170615" />
+              <consumable>
+                <manufacturedProduct>
+                  <manufacturedMaterial>
+                    <code>
+                      <originalText>Afluria Quad</originalText>
+                    </code>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <entryRelationship typeCode="COMP">
+                <sequenceNumber value="1" />
+                <supply classCode="SPLY" moodCode="EVN">
+                  <id root="47d932f7-8c5d-49ad-a1fb-9c1eb0642fda" />
+                  <independentInd value="false" />
+                </supply>
+              </entryRelationship>
+            </substanceAdministration>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <id root="d4c8dbab-b651-4851-b855-4464a554ca8d" />
+          <code code="101.16280" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Observations" />
+          <title>Observations</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table>
+              <caption>Observations</caption>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+            </table>
+          </text>
+        </section>
+      </component>
+      <component>
+        <section>
+          <id root="fef535e0-d42f-473f-89ba-82074b45d078" />
+          <code code="101.16686" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Lifestyle Factors" />
+          <title>Lifestyle Factors</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table>
+              <caption>Lifestyle Factors</caption>
+              <thead>
+                <tr>
+                  <th styleCode="halfPageWidth">Name</th>
+                  <th styleCode="halfPageWidth">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Smoking Status</td>
+                  <td>Current smoker. Smokes 0 Cigarettes  /day.</td>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <entry typeCode="DRIV">
+            <observation classCode="OBS" moodCode="EVN">
+              <id root="d5c8f034-5723-4bff-b8a8-ab50a139c796" />
+              <code code="229819007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT-AU" codeSystemVersion="20101130" displayName="Tobacco use and exposure">
+                <originalText>Tobacco use and exposure</originalText>
+              </code>
+              <value xsi:type="ST">Current smoker. Smokes 0 Cigarettes  /day.</value>
+            </observation>
+          </entry>
+        </section>
+      </component>
+      <component>
+        <section>
+          <id root="f9fe67f4-4575-4e20-8ef1-abdd1835f0d2" />
+          <code code="101.16686" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Social History" />
+          <title>Social History</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table>
+              <caption>Social History</caption>
+              <thead>
+                <tr>
+                  <th styleCode="halfPageWidth">Name</th>
+                  <th styleCode="halfPageWidth">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Other social history</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+        </section>
+      </component>
+      <component>
+        <section>
+          <templateId root="1.2.36.1.2001.1001.101.102.16080" />
+          <id root="ef9924ec-b479-4635-849f-72a0df89acb7" />
+          <code code="102.16080" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Administrative Observations" />
+          <title>Administrative Observations</title>
+          <text mediaType="text/x-hl7-text+xml">
+            <table styleCode="specialty">
+              <caption>Administrative Observations</caption>
+              <tbody>
+                <tr ID="patient-living-arrangements">
+                  <td styleCode="rowHeader">Living arrangements</td>
+                  <td styleCode="rowValue" />
+                </tr>
+                <tr ID="patient-has-a-carer">
+                  <td styleCode="rowHeader">Does the patient have a carer?</td>
+                  <td styleCode="rowValue"></td>
+                </tr>
+                <tr ID="patient-has-care-plan">
+                  <td styleCode="rowHeader">Has Advance care plan?</td>
+                  <td styleCode="rowValue"></td>
+                </tr>
+                <tr ID="patient-has-power-of-attorney">
+                  <td styleCode="rowHeader">Has Enduring Power of Attorney?</td>
+                  <td styleCode="rowValue"></td>
+                </tr>
+                <tr ID="patient-consent-to-electronic-info">
+                  <td styleCode="rowHeader">Consent to electronic info?</td>
+                  <td styleCode="rowValue"></td>
+                </tr>
+                <tr ID="occupation">
+                  <td styleCode="rowHeader">occupation</td>
+                  <td styleCode="rowValue">Accountant</td>
+                </tr>
+                <tr ID="date patient consented to referral">
+                  <td styleCode="rowHeader">date patient consented to referral</td>
+                  <td styleCode="rowValue">31 Jul 2017</td>
+                </tr>
+                <tr ID="feedback requested">
+                  <td styleCode="rowHeader">feedback requested</td>
+                  <td styleCode="rowValue">Yes</td>
+                </tr>
+                <tr ID="consent to referral and sharing of relevant information">
+                  <td styleCode="rowHeader">consent to referral and sharing of relevant information</td>
+                  <td styleCode="rowValue">Yes</td>
+                </tr>
+                <tr ID="Medicare Card Number">
+                  <td styleCode="rowHeader">Medicare Card Number</td>
+                  <td styleCode="rowValue">3500265121</td>
+                </tr>
+                <tr ID="Work Cover">
+                  <td styleCode="rowHeader">Work Cover</td>
+                  <td styleCode="rowValue">Undefined</td>
+                </tr>
+                <tr ID="TAC">
+                  <td styleCode="rowHeader">TAC</td>
+                  <td styleCode="rowValue">Undefined</td>
+                </tr>
+                <tr ID="Motor Accidents Authority">
+                  <td styleCode="rowHeader">Motor Accidents Authority</td>
+                  <td styleCode="rowValue">Undefined</td>
+                </tr>
+                <tr ID="requested specialty">
+                  <td styleCode="rowHeader">requested specialty</td>
+                  <td styleCode="rowValue">Urology</td>
+                </tr>
+                <tr ID="requested service">
+                  <td styleCode="rowHeader">requested service</td>
+                  <td styleCode="rowValue">Urology</td>
+                </tr>
+                <tr ID="priority">
+                  <td styleCode="rowHeader">priority</td>
+                  <td styleCode="rowValue">Routine</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <caption>Progress Note</caption>
+              <thead>
+                <tr>
+                  <th styleCode="halfPageWidth">Field</th>
+                  <th styleCode="halfPageWidth">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Date</td>
+                  <td>26 Jun 2017</td>
+                </tr>
+                <tr>
+                  <td>Reason for visit</td>
+                  <td>Jacksonian fits</td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td colspan="2">
+                    <paragraph styleCode="xPre">
+Reason for visit:
+Jacksonian fits
+Back and leg pain
+
+Actions:
+Dose of Panadol 500mg Tablet changed from 2 In the morning with meals both sides to 2 At midday with meals both sides.
+Adverse reaction to Paracetamol recorded.
+Panadol 500mg Tablet ceased (Adverse reaction).
+Adverse reaction to Alkylating antineoplastic agent recorded.
+Immunisation: ADT given.
+Immunisation: Afluria Quad given.
+
+</paragraph>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <caption>Progress Note</caption>
+              <thead>
+                <tr>
+                  <th styleCode="halfPageWidth">Field</th>
+                  <th styleCode="halfPageWidth">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Date</td>
+                  <td>26 Jun 2017</td>
+                </tr>
+                <tr>
+                  <td>Reason for visit</td>
+                  <td>Back and leg pain</td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td colspan="2">
+                    <paragraph styleCode="xPre">
+Reason for visit:
+Jacksonian fits
+Back and leg pain
+
+Actions:
+Dose of Panadol 500mg Tablet changed from 2 In the morning with meals both sides to 2 At midday with meals both sides.
+Adverse reaction to Paracetamol recorded.
+Panadol 500mg Tablet ceased (Adverse reaction).
+Adverse reaction to Alkylating antineoplastic agent recorded.
+Immunisation: ADT given.
+Immunisation: Afluria Quad given.
+
+</paragraph>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

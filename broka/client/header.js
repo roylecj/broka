@@ -11,6 +11,18 @@ Template.header.helpers({
          return false
        }
     },
+    patientId: function() {
+      if (Session.get("BPACpatientId")){
+        return Session.get("BPACpatientId")
+      }
+    },
+    isBPAC: function() {
+      if (Session.get("isBPAC")) {
+        return true
+      } else {
+        return false
+      }
+    },
     starState: function() {
       if (Session.get("showFavorites")) {
         return "glyphicon glyphicon-star"
@@ -196,5 +208,16 @@ Template.header.helpers({
     },
     'submit form': function(e, template) {
       e.preventDefault();
+    },
+    'click .btnPatient': function(e, t) {
+      e.preventDefault();
+
+      if (Session.get("showPatients")) {
+      Session.set("showPatients", false);
+    } else
+    {
+      Session.set("showPatients", true);
+    }
+
     }
  });

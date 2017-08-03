@@ -23,7 +23,7 @@ Template.brokaPage.onRendered(function() {
   // Session.get("ohcSite");
 
   if (!ohcSite) {
-    ohcSite = "10.2.0.8";
+    ohcSite = "10.1.1.63";
   };
 
 console.log("username string is " + userString);
@@ -64,13 +64,20 @@ Template.brokaPage.helpers({
       brokaSite = Session.get("brokaSite");
 
       if (!brokaSite) {
-        brokaSite = "10.2.0.7";
+        brokaSite = "schedulingdemo.healthhost.net";
       }
-      var urlString = "http://" + brokaSite + "/ultragendabroka/referrer/default.aspx?accesstoken=" + Session.get("accessToken");
+      var urlString = "https://schedulingdemo.healthhost.net/ultragendabroka/referrer/default.aspx?accesstoken=" + Session.get("accessToken");
 
       console.log("url=" + urlString);
 
       return urlString;
+    },
+    isBPAC: function() {
+      if (Session.get("showPatients")) {
+        return true
+      } else {
+        return false
+      }
     },
     isAccessToken: function() {
       if (Session.get("accessToken")) {
@@ -78,5 +85,6 @@ Template.brokaPage.helpers({
       } else {
         return false;
       }
+
     }
 });

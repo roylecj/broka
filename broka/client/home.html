@@ -1,7 +1,22 @@
 <template name="home">
 
-  <form class="main form page">
+  <form class="main form page form-signin">
     {{alertMessage}}
+
+    <div class="container">
+      <img src="dxc_symbol_wht_rgb_300.png" class="navbar-brand"/>
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card">Lorenzo Care Logistics Referrer Login</p>
+			<p id="profile-welcome" class="profile-welcome">Welcome to Lorenzo Care Logistics Referrer Portal</p>
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="loginName" name="loginName" class="form-control" placeholder="User Name" required autofocus>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="submit" class="btn btn-lg {{loginButton}} btn-block btn-signin" value="{{loggingInText}}" />
+			<p id="profile-welcome" class="profile-welcome">&copy; DXC.Technology 2017</p>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+<!--
   <div class="form-group">
     <label class="control-label" for="loginName">Login</label>
     <div class="controls">
@@ -17,6 +32,8 @@
   </div>
 
   <input type="submit" value="{{loggingInText}}" class="btn {{loginButton}}"/>
+
+-->
 </form>
 
 </template>
