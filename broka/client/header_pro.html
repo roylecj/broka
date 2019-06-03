@@ -1,0 +1,36 @@
+<template name="headerPro">
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <img src="dxc_symbol_wht_rgb_300.png" class="navbar-brand"/>
+        <a class="navbar-brand" href="#">Lorenzo Care Logistics</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        {{checkCiscoStatus}}
+          <ul class="nav navbar-nav navbar-right">
+              <button class="navbar-btn btn btn-sm btn-danger btnLogout">Logout</button>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          {{#if ciscoLoggedIn}}
+            <a href="#"><button class="navbar-btn btn btn-sm btn-primary"><img src="cisco.png" class="navbar-brand2" /> Telehealth Online</button></a>
+            {{#if hasPatientArrived}}
+            <button class="navbar-btn btn btn-sm btn-info">{{patientArrivedName}} in waiting room</button>
+            {{/if}}
+          {{else}}
+            <a href="https://api.ciscospark.com/v1/authorize?client_id=Cd3edecb1da36640d1cb5023aa149dec07137e2a57f1ec96b76564f08ba897f99&response_type=code&redirect_uri=http%3A%2F%2F52.255.45.28%3A3000%2Fauthenticate&scope=spark%3Aall%20spark%3Akms&state={{userId}}" target="_blank"><button class="navbar-btn btn btn-sm btn-default"><img src="cisco_bw.png" class="navbar-brand2" /> Offline</button></a>
+          {{/if}}
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+</template>

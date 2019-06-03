@@ -19,23 +19,23 @@
     <patientRole classCode="PAT">
       <id root="33adbd3e-0433-4448-84df-ff288c1745cf" />
       <addr use="H">
-        <country>Australia</country>
-        <postalCode>3126</postalCode>
-        <streetAddressLine>23 Shierlaw Avenue</streetAddressLine>
-        <streetAddressLine>Canterbury VIC</streetAddressLine>
+        <country>UK</country>
+        <postalCode>BA4 8LN</postalCode>
+        <streetAddressLine>12 WELLS ROAD</streetAddressLine>
+        <streetAddressLine>KINGTON LANGLEY</streetAddressLine>
       </addr>
       <telecom value="tel:Not provided" use="H" />
       <patient>
         <name use="L">
-          <family>Smith</family>
-          <given>Michelle</given>
+          <family>Stanton</family>
+          <given>Carl</given>
         </name>
         <name use="P">
-          <family>Smith</family>
-          <given>Michelle</given>
+          <family>Stanton</family>
+          <given>Carl</given>
         </name>
-        <administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.13.68" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" displayName="Female" />
-        <birthTime value="19760817" />
+        <administrativeGenderCode code="M" codeSystem="2.16.840.1.113883.13.68" codeSystemName="AS 5017-2006 Health Care Client Identifier Sex" displayName="Male" />
+        <birthTime value="19400706" />
         <ethnicGroupCode code="9" codeSystem="2.16.840.1.113883.3.879.291036" codeSystemName="METeOR Indigenous Status" displayName="Not stated/inadequately described" />
         <ext:asEntityIdentifier classCode="IDENT">
           <ext:id root="1.2.36.1.5001.1.0.7.1" extension="3500265121" assigningAuthorityName="Medicare Card Number" />
@@ -210,7 +210,7 @@
               <caption>Reason for Referral</caption>
               <tbody>
                 <tr>
-                  <td>Refer for Urgent Urology - Blood noticed in urine (gross hematuria)</td>
+                  <td>Refer for Urgent Urology - Suspected Prostate Cancer. Notes: Elevated PSA > 7mg, UTI Excluded. Repeat PSA - no Change. DRE abnormal</td>
                 </tr>
               </tbody>
             </table>
@@ -251,7 +251,7 @@
               <id root="99f5b35d-bfad-430d-8172-dcbc195660c5" />
               <code code="42349-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Reason for referral" />
               <effectiveTime value="20170731153235" />
-              <value xsi:type="ST">Refer for Urgent Urology - Blood noticed in urine (gross hematuria)</value>
+              <value xsi:type="ST">Refer for Urgent Urology - Suspected Prostate Cancer. Notes: Elevated PSA > 7mg, UTI Excluded. Repeat PSA - no Change. DRE abnormal</value>
             </observation>
           </entry>
         </section>
@@ -391,10 +391,10 @@
       <component>
         <section>
           <id root="c134f06b-e00e-4513-b3c4-fb3ba75d4284" />
-          <code code="101.20117" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Diagnostic Investigations" />
-          <title>Diagnostic Investigations</title>
+          <code code="101.20117" codeSystem="1.2.36.1.2001.1001.101" codeSystemName="NCTIS Data Components" displayName="Clinical Notes" />
+          <title>Clinical Notes</title>
           <text mediaType="text/x-hl7-text+xml">
-            <paragraph>This section may contain the following subsections Pathology Test Result, Imaging Examination Result and Requested Service(s).</paragraph>
+            <paragraph>Elevated PSA  > 7 mg, UTI Excluded. Repeat PSA - No change. DRE Abnormal</paragraph>
           </text>
         </section>
       </component>

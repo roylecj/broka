@@ -8,7 +8,8 @@ Router.route('/broka', {name: 'brokaPage'});
 Router.route('/brokaNew', {name: 'homeNew', layoutTemplate: 'layoutNew'});
 Router.route('/patientPortalPage', {name: 'patientBrokaPage'});
 Router.route('/brokaPatient', {name: 'brokaPatient', layoutTemplate: 'layoutNew'});
-Router.route('/pro', {name: 'proPage', layoutTemplate: 'layout'});
+Router.route('/pro', {name: 'proPage', layoutTemplate: 'layoutPro'});
+Router.route('/proLogin', {name: 'proLogin', layoutTemplate: 'layoutNew'});
 
 Router.route('/upload/:_id', {
   name: 'upload',
@@ -29,14 +30,26 @@ console.log("ENDPOINT=patientOnlyPortal");
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
 // patientString="100037";
-  Session.set("brokaSite", "10.1.1.63");
+  Session.set("brokaSite", "10.4.0.7");
   Router.go('brokaPage');
   this.response.end("HERE");
   this.next();
 }, {name: 'patientOnlyPortalAccess'});
 
+Router.route('/ipmLaunch', function() {
+  //var redirectUrl = 'PimsContextSwitch:-D:IPMAU,U:pims,P:pims32,PASID:0000034'; // + this.params.query.patientId;
+var redirectUrl = "pimscontextswitch:-D:IPMAU,U:pims,P:pims32,FACIL:,PASID:" + this.params.query.patientId;
+  console.log(redirectUrl);
+
+  this.response.writeHead(302, {
+    'Location': redirectUrl
+  });
+
+  this.response.end();
+}, {name: "tester", where:"server"});
+
 Router.route('/refer', function() {
-  var redirectUrl = 'https://mobilepasdemo.healthhost.net/ereferrals/' + this.params.query.patientId + '.xml';
+  var redirectUrl = 'http://10.4.0.7:3000/ereferrals/' + this.params.query.patientId + '.xml';
 
 console.log(redirectUrl);
 
@@ -45,21 +58,36 @@ console.log(redirectUrl);
   });
 
   this.response.end();
-}, {where: "server"});
+}, {name: "refer", where: "server"});
+Router.route('/webpas', function() {
+  var redirectUrl = "https://webpasdemo.healthhost.net/pas/php/PatientView.php?urnumber=" + this.params.query.patientId;
+  var userData = new Buffer('jsnell:js123').toString('base64');
+
+  console.log("user = " + userData);
+
+  this.response.writeHead(302, {
+    'Location': redirectUrl,
+    'Authorization': 'Basic ' + userData
+  });
+
+  this.response.end();
+
+}, {name: "webpas", where: "server"});
+
 Router.route('/mmh', {name: 'mmhPage', layoutTemplate: 'mmhLayout'});
 Router.route('/bpac/patient/:patientId/pathway/:pathway/', function() {
 
   console.log("Inside broka");
 // We need to set the portal page flag so that we can add attachments...
 
-    Session.set("brokaSite", "10.1.1.63");
-    Session.set("ohcSite", "10.1.1.63");
+    Session.set("brokaSite", "10.4.0.7");
+    Session.set("ohcSite", "10.4.0.12");
     Session.set("portalPage", true);
     Session.set("fromMedtech", true);
     Session.set("medtechPatient", this.params.patientId);
 
     Session.set("BPACpatientId", this.params.patientId);
-    
+
 // As the user is a combination of pathway and the user id...
    var userId = this.params.query.user + this.params.pathway;
 
@@ -109,8 +137,8 @@ Router.route('/patientPortalNOTUSED/:patientId', function() {
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
 // patientString="100037";
-Session.set("brokaSite", "10.1.1.63");
-Session.set("ohcSite", "10.1.1.63");
+Session.set("brokaSite", "10.4.0.7");
+Session.set("ohcSite", "10.4.0.12");
   Router.go('brokaPage');
   this.response.end("HERE");
   this.next();
@@ -119,16 +147,16 @@ Session.set("ohcSite", "10.1.1.63");
 Router.route('/patientPortal/:patientId', function() {
   console.log("CORRECT");
   console.log("ENDPOINT=patientPortalNOTUSED");
-  Session.set("userName", "9A2M 7MV3");
+  Session.set("userName", "79AL AAF8");
   Session.set("dob", "1951-09-01");
   Session.set("sex", "M");
-  Session.set("medtechPatient", "245728");
+  Session.set("medtechPatient", "CSC0000703");
 
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
 // patientString="100037";
-Session.set("brokaSite", "10.1.1.63");
-Session.set("ohcSite", "10.1.1.63");
+Session.set("brokaSite", "10.4.0.7");
+Session.set("ohcSite", "10.4.0.12");
 
 console.log("routing to patientBrokaPage");
 
@@ -136,6 +164,202 @@ console.log("routing to patientBrokaPage");
   this.response.end("HERE");
   this.next();
 }, {name: 'patientPortalAccess'});
+
+Router.route("/telehealthVC/:appointmentId", function() {
+  var isComplete = false;
+
+  var thisId = this.params.appointmentId + '|1';
+
+  Meteor.call("postViaduct", "http://10.4.0.12:3500/", thisId, function(e, r) {
+      console.log("Completed");
+      isComplete = true;
+  });
+
+});
+
+Router.route('/authorised', {name: 'authorised'});
+
+Router.route('/authoriseMe', function() {
+  var userId = Meteor.users().username;
+
+  console.log("user = " + userId);
+
+  var redirectUrl = "https://api.ciscospark.com/v1/authorize?client_id=Cd3edecb1da36640d1cb5023aa149dec07137e2a57f1ec96b76564f08ba897f99&response_type=code&redirect_uri=http%3A%2F%2F52.255.45.28%3A3000%2Fauthenticate&scope=spark%3Aall%20spark%3Akms&state=" + userId;
+
+  this.response.writeHead(302, {
+    'Location': redirectUrl
+  });
+
+  this.response.end();
+}, {name: 'authoriseMe', where: 'server' });
+
+Router.route("/authenticate", function() {
+
+  // Ok, so we get the authorization code, and then we can call viaduct to update the cache with the 
+  // token...
+
+  var authCode = this.params.query.code;
+  var redirectUrl = "";
+  var isComplete = false;
+
+  console.log("Adding auth code of " + authCode);
+
+  Meteor.call("postViaduct", "http://10.4.0.17:3500/", authCode, function(e, r) {
+      console.log("Posting to viaduct >>> ");
+      console.log("                      Authorization Code = " + authCode);
+      console.log("                   <<< ")
+  });
+
+  // So, we are complete, then lets redirect to the right page.
+
+  Router.go("authorised");
+},{name: "authenticate"});
+
+Router.route('/telehealth/:appointmentId', function() {
+  // This launches the telehealth visit for the patient
+
+  // First set the stage marker for this appointment
+
+  // Now launch the web site.
+
+  // Here is the SKYPE version
+ // var redirectUrl = "https://meet.lync.com/cscportal/croyle3/RVC11C2R?s1=1";
+//  var userData = new Buffer('jsnell:js123').toString('base64');
+
+  var redirectUrl = "http://52.255.45.28/cisco_patient.html";
+  var isComplete = false;
+
+  var thisId = this.params.appointmentId + '|1';
+
+  Meteor.call("postViaduct", "http://10.4.0.12:3500/", thisId, function(e, r) {
+      console.log("Completed");
+      isComplete = true;
+  });
+/*
+  while(! isComplete) {
+    console.log("waiting");
+    // waiting
+  }
+  */
+//  console.log("user = " + userData);
+
+/*
+  this.response.writeHead(302, {
+    'Location': redirectUrl,
+    'Authorization': 'Basic ' + userData
+  });
+*/
+
+  console.log("redirecting");
+
+  this.response.writeHead(302, {
+    'Location': redirectUrl
+  });
+
+  this.response.end();
+
+}, {name: "telehealth", where: "server"});
+
+Router.route('/telehealthPatient', function() {
+  // This launches the telehealth visit for the patient
+
+  var thisId = this.params.query.patientId;
+  var accessToken;
+  var roomId;
+  var isComplete = false;
+
+  console.log("thisId= " + thisId);
+
+  // Getting the room for the next appointment id - for this particular patient...
+  Meteor.call("callViaduct", "http://10.4.0.17:3800/?" + thisId, function(e, r) {
+      console.log("response from viaduct -" + r);
+      var responseBack = JSON.parse(r);
+
+      roomId = responseBack.room_id;
+      isComplete = true;
+  });
+
+  // Wait until it is complete
+
+  while(isComplete === false) {
+    // Do nothing...
+  }
+
+  isComplete = false;
+
+  // Looking up a token for this patient...
+
+  Meteor.call("callViaduct", "http://10.4.0.17:3600/?jl8487508", function(e, r) {
+      var responseBack = JSON.parse(r);
+
+      accessToken = responseBack.tokenData;
+      isComplete = true;
+  });
+
+  while(isComplete === false) {
+    // Do nothing...
+  }
+
+  // We are redirecting the patient to the correct URL based upon their token and room.
+  var redirectUrl = "http://52.255.45.28/cisco_launch.html?accessToken=" + accessToken + "&spaceId=" + roomId;
+
+  this.response.writeHead(302, {
+    'Location': redirectUrl
+  });
+
+  this.response.end();
+
+}, {name: "telehealthPatient", where: "server"});
+
+Router.route('/telehealthLaunch', function() {
+  // This launches the telehealth visit for the Clinician
+
+//  var redirectUrl = "https://meet.lync.com/cscportal/croyle3/RVC11C2R";
+
+  var thisId = this.params.query.appointmentId;
+  var accessToken;
+  var roomId;
+  var isComplete = false;
+
+  console.log("thisId= " + thisId);
+
+  Meteor.call("callViaduct", "http://10.4.0.17:3700/?" + thisId, function(e, r) {
+
+      console.log("response from viaduct -" + r);
+      var responseBack = JSON.parse(r);
+
+      roomId = responseBack.room_id;
+      isComplete = true;
+  });
+
+  // Wait until it is complete
+
+  while(isComplete === false) {
+    // Do nothing...
+  }
+
+    isComplete = false;
+
+  Meteor.call("callViaduct", "http://10.4.0.17:3600/?admin", function(e, r) {
+      var responseBack = JSON.parse(r);
+
+      accessToken = responseBack.tokenData;
+      isComplete = true;
+  });
+
+  while(isComplete === false) {
+    // Do nothing...
+  }
+
+  var redirectUrl = "http://52.255.45.28/cisco_launch.html?accessToken=" + accessToken + "&spaceId=" + roomId;
+
+  this.response.writeHead(302, {
+    'Location': redirectUrl
+  });
+
+  this.response.end();
+
+}, {name: "telehealthLaunch", where: "server"});
 
 Router.route('/patientPortalNOTUSEDOLD/:patientId', function() {
   console.log("CORRECT");
@@ -148,8 +372,8 @@ Router.route('/patientPortalNOTUSEDOLD/:patientId', function() {
 // userString = "ASHINE";
 // passwordString = "MEDTECH123";
 // patientString="100037";
-Session.set("brokaSite", "10.1.1.63");
-Session.set("ohcSite", "10.1.1.63");
+Session.set("brokaSite", "10.4.0.7");
+Session.set("ohcSite", "10.4.0.12");
   Router.go('patientBrokaPage');
   this.response.end("HERE");
   this.next();
@@ -168,7 +392,7 @@ Router.route('/uploadItem/:name', function() {
   console.log(fileNameExt);
 
   this.response.end(idFromName._id + '.' + fileNameExt);
-},  {where: 'server'});
+},  {name: 'uploadItemRec', where: 'server'});
 
 Router.route('/documentList/', {
   name: 'documentList',
@@ -190,7 +414,7 @@ Router.route('/updateItem/:userId/setPatient/:patientId/department/:dept/doctor/
 //    Session.set('documentsUploaded', true);
     // this.render('updateItem');
     this.response.end('done');
-}, {where: 'server'});
+}, {name: 'updateItemEntry', where: 'server'});
 
 Router.route('/referral/:userId/patient/:patientId/id/:seqId/notes/:notes', function() {
     // console.log("referral-" + this.request.body.notes);
@@ -198,7 +422,7 @@ Router.route('/referral/:userId/patient/:patientId/id/:seqId/notes/:notes', func
     console.log("checking insert for notes");
     Meteor.call('insertReferralStatus', this.params.userId, this.params.patientId, this.params.seqId, this.params.notes);
     this.response.end("DONE");
-}, {where: 'server'});
+}, {name: 'erefer', where: 'server'});
 
 Router.route('/internal', {
     name: 'referralByInternalUser'
@@ -247,8 +471,8 @@ console.log("Inside broka");
 
        Session.set("accessToken", "");
 
-Session.set("brokaSite", "10.1.1.63");
-Session.set("ohcSite", "10.1.1.63");
+Session.set("brokaSite", "10.4.0.7");
+Session.set("ohcSite", "10.4.0.12");
        Router.go("brokaPage");
      });
 

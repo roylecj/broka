@@ -1,10 +1,17 @@
-Template.header.onCreated(function() {
+Template.headerPro.onCreated(function() {
     Session.setDefault("gpCode", "");
     Session.setDefault("showFavorites", "");
-    Session.setDefault("telehealthAppointment", false);
+    Session.setDefault("ciscoToken", "");
+    Session.setDefault("hasCiscoToken", false);
+    Session.setDefault("checkStatus", true);
+    Session.setDefault("patientArrived", "");
+    Meteor.setInterval(function() {
+      Session.set("checkStatus", true);
+    }, 5000);
+  
 });
 
-Template.header.helpers({
+Template.headerPro.helpers({
     currentUserEntered: function() {
        if (Session.get("signedIn")) {
          return true
@@ -57,9 +64,6 @@ Template.header.helpers({
         patientId: null
        }).count();
     },
-    appointmentType: function() {
-
-    },
     specificFormData: function() {
 
       if (Session.get("oldMode")){
@@ -110,12 +114,6 @@ Template.header.helpers({
         return false;
       }
     },
-    hasTelehealthAppt: function() {
-      return true
-    },
-    isRunningTelehealth: function() {
-      return Session.get("telehealthAppointment");
-    },
     isPatientPortal: function() {
       if (Session.get("patientPortal")) {
         return true
@@ -151,6 +149,98 @@ Template.header.helpers({
         return false;
       }
     },
+    checkCiscoStatus: function() {
+      if (Session.get("checkStatus") === true) {
+        var userId = Session.get("currentUser");
+
+        var urlString = "http://10.4.0.17:3600/?" + userId;
+        var respValue = "";
+        
+        console.log("checkCiscoStatus for " + userId);
+        console.log("urlString = " + urlString);
+
+        respValue = Meteor.call('callViaduct', urlString, function(e, result) {
+          var tokenResult = JSON.parse(result);
+
+          console.log(tokenResult);
+
+          if (tokenResult.tokenData) {
+            Session.set("ciscoToken", tokenResult);
+            Session.set("hasCiscoToken", true);  
+          } else 
+          {
+            Session.set("ciscoToken", "");
+            Session.set("hasCiscoToken", false);
+          }
+        }); 
+
+        urlString = "http://10.4.0.17:4100/?" + userId;
+        respValue = "";
+
+        respValue = Meteor.call('callViaduct', urlString, function(e, result) {
+debugger
+          var patientId;
+          var patientName;
+          var appointmentId;
+          var appointmentType;
+          var jsonResult = JSON.parse(result);
+
+          if (jsonResult) {
+
+            if (jsonResult.patientId) {
+              patientId = jsonResult.patientId;
+              patientName = jsonResult.patientSurname + ", " + jsonResult.patientGiven;
+              appointmentId = jsonResult.appointmentId;
+              appointmentType = jsonResult.appointmentType;
+    
+              Session.set("patientArrived", patientId);
+              Session.set("patientArrivedName", patientName);
+              Session.set("patientArrivedApId", appointmentId);
+              Session.set("patientArrivedApType", appointmentType);    
+            } else {
+              Session.set("patientArrived", "");
+              Session.set("patientArrivedName", "");
+              Session.set("patientArrivedApId", "");
+              Session.set("patientArrivedApType", "");    
+            }
+          } else {
+            Session.set("patientArrived", "");
+            Session.set("patientArrivedName", "");
+            Session.set("patientArrivedApId", "");
+            Session.set("patientArrivedApType", "");  
+          }
+        }); 
+
+        Session.set("checkStatus", false);
+      }
+    },
+    patientArrived: function() {
+      return Session.get("patientArrived");
+    },
+    patientArrivedName: function() {
+      return Session.get("patientArrivedName");
+    },
+    patientArrivedApId: function() {
+      return Session.get("patientArrivedApId");
+    },
+    patientArrivedApType: function() {
+      return Session.get("patientArrivedApType");
+    },
+    hasPatientArrived: function() {
+      if (Session.get("patientArrived") === "") {
+        return false
+      } else {
+        return true
+      }
+    },
+    ciscoLoggedIn: function() {
+      console.log("Checking cisco login");
+
+      return Session.get("hasCiscoToken");
+    },
+    userId: function() {
+      return Session.get("currentUser");
+    },
     acGPSettings: function() {
    return {
      position: "bottom",
@@ -168,7 +258,7 @@ Template.header.helpers({
  }
  });
 
- Template.header.events({
+ Template.headerPro.events({
     'click .buttonLogout': function(e) {
 
       Session.set("gpCode", "");
@@ -186,17 +276,8 @@ Template.header.helpers({
     },
     "autocompleteselect input": function(event, template, doc) {
       console.log("select " + doc);
+//      debugger
       Session.set("gpCode", doc.gpCode);
-    },
-    'click .btnLaunchAppointment': function(e, t) {
-      console.log("telehealth appointment");
-      e.preventDefault();
-
-      Session.set("telehealthAppointment", true);
-    },
-    'click .btnEndAppointment': function(e, t) {
-      e.preventDefault();
-      Session.set("telehealthAppointment", false);
     },
     'click .sentButton': function(e) {
       // Remove the notifications so that we start from scratch again...
@@ -239,8 +320,9 @@ Template.header.helpers({
     }
 
     },
-    'click .btnCisco': function(e, t) {
+    'click .btnLogout': function(e, t) {
       e.preventDefault();
-      Router.go("authoriseMe");
+
+      Router.go("proLogin");
     }
  });

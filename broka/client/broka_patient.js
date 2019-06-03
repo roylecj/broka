@@ -27,6 +27,8 @@ Template.brokaPatient.events({
   "submit form": function(e, t){
     e.preventDefault();
 
+debugger
+
     var patientId =  $(e.target).find('[name=patientId]').val();
     var accessCode = $(e.target).find('[name=accessCode]').val();
     var patientDOB = $(e.target).find('[name=patientDOB]').val();

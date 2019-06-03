@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
           </button>
          <img src="dxc_symbol_wht_rgb_300.png" class="navbar-brand"/>
-          <a class="navbar-brand" href="#">Care Logistics</a>
+          <a class="navbar-brand" href="#">Lorenzo Care Logistics</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -24,14 +24,20 @@
           {{/if}}
 
           <ul class="nav navbar-nav navbar-right">
-
+<!--
             {{#if isBPAC}}
-<!--              <button class="btn btn-success btn-sm btnPatient"><span class="glyphicon glyphicon-user"></span> Patient Details</button> -->
               <a href="ereferrals/{{patientId}}.xml" target="_blank" class="btn btn-success btn-sm btnReferral">BPAC Referral: Urgent Urology</a>
             {{/if}}
-
+-->
             {{#if isPatientPortal}}
-              <button class="btn btn-danger btn-sm btnLogoutPatient">Logout</button>
+              {{#if hasTelehealthAppt}}
+                {{#if isRunningTelehealth}}
+                <button class="navbar-btn btn btn-sm btn-danger btnEndAppointment"><img src="cisco.png" class="navbar-brand2" /> End Appointment</button>
+                {{else}}
+                <button class="navbar-btn btn btn-sm btn-primary btnLaunchAppointment"><img src="cisco.png" class="navbar-brand2" /> Launch Next Appointment</button>
+                {{/if}}
+              {{/if}}
+            <button class="btn btn-danger btn-sm btnLogoutPatient">Logout</button>
             {{/if}}
 
             {{#if isPortal}}

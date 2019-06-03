@@ -80,7 +80,7 @@ Template.home.events({
     } else {
 
       if (!cacheIsValid) {
-      var urlString = "http://10.1.1.63:1025/?login=" + userId + "&password=" + password + "&accessType=4";
+      var urlString = "http://10.4.0.12:1025/?login=" + userId + "&password=" + password + "&accessType=4";
       var respValue = "";
 
       respValue = Meteor.call('callViaduct', urlString, function(e, result) {

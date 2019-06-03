@@ -41,6 +41,22 @@ Meteor.methods({
 
       return result.content;
     },
+    postViaduct: function (url, param) {
+      console.log("postViaduct=" + url);
+      console.log("param=" + param);
+//      this.unblock();
+
+      try {
+        HTTP.call("POST", url,
+        {
+          content: param
+        })
+      } catch (e) {
+        console.log("error=" + e);
+      };
+
+      return;
+    },
     insertNotification: function(userId) {
       Notifications.insert( {userId: userId});
     },
