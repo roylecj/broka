@@ -46,16 +46,25 @@
 
     <div class="form-group">
       <label class="control-label" for="patientId">Patient Id</label>
+      {{#if vpnEnabled}}
+      <div class="input-group input-group-sm">
+          <input name="patientId" id="patientId" type="text" value="" placeholder="" class="form-control"/>
+          <span class="input-group-addon btnSearch"><i class="glyphicon glyphicon-search"></i></span>
+      </div>
+      {{else}}
       <div class="controls">
           <input name="patientId" id="patientId" type="text" value="" placeholder="" class="form-control"/>
+
       </div>
+      {{/if}}
     </div>
 
     <div class="form-group">
       <label class="control-label" for="accessCode">Access Code</label>
       <div class="controls">
-          <input name="accessCode" id="accessCode" type="password" value="" placeholder="" class="form-control"/>
+        <input name="accessCode" id="accessCode" type="password" value="" placeholder="" class="form-control"/>
       </div>
+
     </div>
 
     <div class="form-group">
@@ -77,8 +86,8 @@
       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
       <input name="patientDOB" class="patientDOB form-control" type="text"/>
     </div>
-
-              <input type="submit" class="btn btn-lg {{loginButton}} btn-block btn-signin" value="{{loggingInText}}" />
+    
+    <input type="submit" class="btn btn-lg {{loginButton}} btn-block btn-signin" value="{{loggingInText}}" />
 		<p id="profile-welcome" class="profile-welcome">&copy; DXC.Technology 2019</p>
       </div><!-- /card-container -->
   </div><!-- /container -->

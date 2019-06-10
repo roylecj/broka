@@ -30,12 +30,14 @@
             {{/if}}
 -->
             {{#if isPatientPortal}}
+            {{#if isCiscoOn}}
               {{#if hasTelehealthAppt}}
                 {{#if isRunningTelehealth}}
                 <button class="navbar-btn btn btn-sm btn-danger btnEndAppointment"><img src="cisco.png" class="navbar-brand2" /> End Appointment</button>
                 {{else}}
                 <button class="navbar-btn btn btn-sm btn-primary btnLaunchAppointment"><img src="cisco.png" class="navbar-brand2" /> Launch Next Appointment</button>
                 {{/if}}
+              {{/if}}
               {{/if}}
             <button class="btn btn-danger btn-sm btnLogoutPatient">Logout</button>
             {{/if}}

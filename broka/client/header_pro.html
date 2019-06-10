@@ -16,10 +16,18 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        {{checkCiscoStatus}}
+        
           <ul class="nav navbar-nav navbar-right">
               <button class="navbar-btn btn btn-sm btn-danger btnLogout">Logout</button>
           </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+              <a href="{{pathFor 'settings'}}" class="navbar-btn btn btn-sm btn-primary btnSettings"><i class="fas fa-cog"></i></a>
+          </ul>
+
+          {{#if isCiscoOn}}
+          {{checkCiscoStatus}}
+  
           <ul class="nav navbar-nav navbar-right">
           {{#if ciscoLoggedIn}}
             <a href="#"><button class="navbar-btn btn btn-sm btn-primary"><img src="cisco.png" class="navbar-brand2" /> Telehealth Online</button></a>
@@ -30,6 +38,7 @@
             <a href="https://api.ciscospark.com/v1/authorize?client_id=Cd3edecb1da36640d1cb5023aa149dec07137e2a57f1ec96b76564f08ba897f99&response_type=code&redirect_uri=http%3A%2F%2F52.255.45.28%3A3000%2Fauthenticate&scope=spark%3Aall%20spark%3Akms&state={{userId}}" target="_blank"><button class="navbar-btn btn btn-sm btn-default"><img src="cisco_bw.png" class="navbar-brand2" /> Offline</button></a>
           {{/if}}
         </ul>
+        {{/if}}
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>

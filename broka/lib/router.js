@@ -1,6 +1,11 @@
 Router.configure({
   layoutTemplate: 'layout',
-  loadingTemplate: 'loading'
+  loadingTemplate: 'loading',
+  waitOn: function() {
+    return [
+      Meteor.subscribe('userSettings')
+    ];
+  }
 });
 
 Router.route('/', {name: 'home', layoutTemplate: 'layoutNew'});
@@ -10,6 +15,7 @@ Router.route('/patientPortalPage', {name: 'patientBrokaPage'});
 Router.route('/brokaPatient', {name: 'brokaPatient', layoutTemplate: 'layoutNew'});
 Router.route('/pro', {name: 'proPage', layoutTemplate: 'layoutPro'});
 Router.route('/proLogin', {name: 'proLogin', layoutTemplate: 'layoutNew'});
+Router.route('/settings', {name: 'settings'});
 
 Router.route('/upload/:_id', {
   name: 'upload',
@@ -143,6 +149,8 @@ Session.set("ohcSite", "10.4.0.12");
   this.response.end("HERE");
   this.next();
 }, {name: 'patientPortalAccessOLD'});
+
+Router.route('/ciscoLog', {name: "ciscoLog"});
 
 Router.route('/patientPortal/:patientId', function() {
   console.log("CORRECT");

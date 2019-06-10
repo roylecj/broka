@@ -20,6 +20,15 @@ Template.brokaPatient.helpers({
     } else {
       return "Login"
     }
+  },
+  vpnEnabled: function() {
+    /*
+    if (window.document.URL.startsWith("http://10.4.0.7")) {
+      return true
+    } else {
+      return false
+    }*/
+    return true
   }
 });
 
@@ -50,5 +59,20 @@ debugger
     Session.set("patientPortal", true);
 
     Router.go("patientBrokaPage");
+  },
+  "click .btnSearch": function(e, t) {
+    e.preventDefault();
+
+    var patientId =  $(document).find('[name=patientId]').val();
+
+    console.log("Searching for the patient");
+debugger
+    Meteor.call("getPatientDetails", patientId, window.document, function(e, r) {
+        if (! e) {
+          $(document).find('[name=accessCode]').val(r.accessCode);
+          $(document).find('[name=patientDOB]').val(r.patientDOB);
+          $(document).find('[name=patientSex]').val(r.patientSex);      
+        }
+    });
   }
 });

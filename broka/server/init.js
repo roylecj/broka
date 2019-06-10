@@ -23,8 +23,37 @@ Meteor.methods({
       Uploads.update({userId: userId, patientId: null}, {$set: {patientId: patientId, dept: deptId, createdBy: doctor}}, { multi: true});
 
     },
+    getPatientDetails: function(patientId, doc) {
+      var patientRec = {};
+/*
+      if (doc.location.hostname !== "10.4.0.7") {
+        throw new Meteor.error("unauthorised", "Unable to use this function");
+        return {}
+      }*/
+      var url = "http://10.4.0.17:4300/?" + patientId;
+
+      try {
+        var result = HTTP.call("GET", url,
+        {
+          followRedirects: true
+        })
+      } catch (e) {
+        console.log(e);
+      };
+
+      patientRec = JSON.parse(result.content);
+
+      return patientRec
+    },
+    isVPNEnabled: function(url) {
+      if (url.document.URL.startsWith("http://10.4.0.7")) {
+        return true
+      } else {
+        return false
+      }
+    },
     callViaduct: function (url) {
-      console.log("callViaduct=" + url);
+//      console.log("callViaduct=" + url);
 
 //      this.unblock();
 
@@ -37,7 +66,7 @@ Meteor.methods({
         console.log(e);
       };
 
-      console.log(result.content);
+//      console.log(result.content);
 
       return result.content;
     },

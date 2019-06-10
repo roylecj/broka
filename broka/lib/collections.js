@@ -78,3 +78,11 @@ ReferralStatus.allow({
     return true;
   }
 })
+
+UserSettings = new Mongo.Collection("userSettings");
+
+UserSettings.deny({
+    insert: function(userId, data) { return true; },
+    remove: function(userId, data) { return true; },
+    update: function(userId, data) { return true; }
+});

@@ -50,7 +50,7 @@ Template.patientBrokaPage.onRendered(function() {
   
           var patientAccessToken = responseBack1.tokenData;
 
-          console.log("6. accessToken = " + patientAccessToken);
+          console.log("accessToken = " + patientAccessToken);
       
           Session.set("patientAccessToken", patientAccessToken);
       });
@@ -62,10 +62,10 @@ Template.patientBrokaPage.onRendered(function() {
       if (apptId) {
         Meteor.call("postViaduct", "http://10.4.0.12:3500/", thisId, function(e2, r2) {
           // updating to arrived.
-          console.log("7. Logging update to arrival of appointment " + thisId);
+          console.log("Logging update to arrival of appointment " + thisId);
         });
         Meteor.call("callViaduct", "http://10.4.0.17:3950/?" + apptId, function(e2, r2) {
-          console.log("8. updating arrival so clinician sees")
+          console.log("updating arrival so clinician sees")
         });
       }
     });
@@ -84,6 +84,18 @@ Template.patientBrokaPage.helpers({
       }
 
       return urlString;
+    },
+    isCiscoOn: function() {
+      var findSetting = UserSettings.findOne({key: "CISCO_ACTIVE"});
+      if (!findSetting) {
+        return false
+      } else {
+        if (findSetting.value === "true") {
+          return true
+        } else {
+          return false
+        }
+      }
     },
     pageURL: function() {
       var urlString;

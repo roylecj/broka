@@ -24,6 +24,20 @@ Template.headerPro.helpers({
         return Session.get("BPACpatientId")
       }
     },
+    isCiscoOn: function() {
+      var findSetting = UserSettings.findOne({key: "CISCO_ACTIVE"});
+debugger
+
+      if (!findSetting) {
+        return false
+      } else {
+        if (findSetting.value === "true") {
+          return true
+        } else {
+          return false
+        }
+      }
+    },
     isBPAC: function() {
       if (Session.get("isBPAC")) {
         return true
@@ -178,7 +192,6 @@ Template.headerPro.helpers({
         respValue = "";
 
         respValue = Meteor.call('callViaduct', urlString, function(e, result) {
-debugger
           var patientId;
           var patientName;
           var appointmentId;
@@ -234,8 +247,6 @@ debugger
       }
     },
     ciscoLoggedIn: function() {
-      console.log("Checking cisco login");
-
       return Session.get("hasCiscoToken");
     },
     userId: function() {

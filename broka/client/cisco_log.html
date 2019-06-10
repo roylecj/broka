@@ -1,0 +1,49 @@
+<template name="ciscoLog">
+    <button class="btn btn-sm btn-primary btnCheck">Check</button>
+    <br/>
+    <!--
+    <h1>Patient: {{patientId}}</h1><br/>
+    <h1>Patient Name: {{patientName}}</h1><br/>
+    <h1>Appointment Type: {{appointmentType}}</h1><br/>
+    <h1>Appointment id: {{appointmentId}}</h1><br/>
+    <br/>
+-->
+    <div class="container">
+        
+            <div class="form-group">
+              <label class="control-label" for="patientId">Patient Id</label>
+              <div class="controls">
+                  <input name="patientId" id="patientId" type="text" value="{{patientId}}" placeholder="" class="form-control"/>        
+              </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="patientName">Patient Name</label>
+                <div class="controls">
+                    <input name="patientName" id="patientName" type="text" value="{{patientName}}" placeholder="" class="form-control"/>        
+                </div>
+
+                </div>
+
+                <div class="form-group">
+                        <label class="control-label" for="appointmentType">Appointment type</label>
+                        <div class="controls">
+                            <input name="appointmentType" id="appointmentType" type="text" value="{{appointmntType}}" placeholder="" class="form-control"/>        
+                        </div>
+        
+                        </div>
+
+                        <div class="form-group">
+                                <label class="control-label" for="appointmentId">AppointmentId</label>
+                                <div class="controls">
+                                    <input name="appointmentId" id="appointmentId" type="text" value="{{appointmentId}}" placeholder="" class="form-control"/>        
+                                </div>
+                
+                                </div>
+                
+        
+        </div><!-- /container -->
+        
+    <button class="btn btn-sm btn-danger btnDelete">Delete</button>
+</template>

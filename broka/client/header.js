@@ -131,6 +131,20 @@ Template.header.helpers({
 
       }
     },
+    isCiscoOn: function() {
+      var findSetting = UserSettings.findOne({key: "CISCO_ACTIVE"});
+debugger
+
+      if (!findSetting) {
+        return false
+      } else {
+        if (findSetting.value === "true") {
+          return true
+        } else {
+          return false
+        }
+      }
+    },
     notMedtech: function() {
       return !Session.get("fromMedtech");
     },
